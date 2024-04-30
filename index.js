@@ -4,6 +4,9 @@ window.onload = function () {
     if (!mobile) {
       $("#menu").css("opacity", 0);
       $("#menu").css("display", "flex");
+      $(".menulink").animate({
+        height: "70px"
+      }, 300)
       $("#menu").animate({
         opacity:1
       }, 100)
@@ -21,6 +24,9 @@ window.onload = function () {
         opacity: 0
       }, 100, function() {
         $("#menu").css("display", "none");
+        $(".menulink").animate({
+          height: "50px"
+        }, 5)
 
       })
       $("#mbar").animate({

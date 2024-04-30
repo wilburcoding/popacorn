@@ -209,7 +209,9 @@ body {
   margin: 5px;
   height: 150px;
 }
-
+.menulink {
+  height:50px;
+}
 @media only screen and (max-width: 900px) {
   #navlinks {
     display: none;
