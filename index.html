@@ -16,29 +16,42 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
     <script src="https://kit.fontawesome.com/3f34c302de.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
     <main>
 
-        <div class="backgroundImg">
-            <img src="./assets/popcornmain.jpg" style='height: 100vh;min-width: 50%;width:50%;object-fit: cover;margin:0;'
-                alt="" />
+        <div class="backgroundImg headl">
+            <img src="./assets/popcornmain.jpg"
+                style='height: 100vh;min-width: 50%;width:50%;object-fit: cover;margin:0;' alt="" />
         </div>
         <div class="navBar">
             <h1 style="margin:0;margin-left:15px;">POPACORN</h1>
-            <h4 style="margin:0;margin-left:100px">Store<h4>
-                    <h4 style="margin:0;margin-left:100px">Delivery</h4>
-                    <h4 style="margin:0;margin-left:100px">Contact Us</h4>
+            <div id="navlinks">
+                <h4 style="margin:0;margin-left:100px">Store</h4>
+                <h4 style="margin:0;margin-left:100px">Delivery</h4>
+                <h4 style="margin:0;margin-left:100px">Contact Us</h4>
+            </div>
+            <div id="mbar">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
 
         </div>
+        <div id="menu">
+            <h4 style="margin:0;margin-left:100px">Store</h4>
+            <h4 style="margin:0;margin-left:100px">Delivery</h4>
+            <h4 style="margin:0;margin-left:100px">Contact Us</h4>
+        </div>
         <div id="head-content">
-            <div
+            <div class="headl"
                 style="width:50%;height:100vh;display:flex;align-items: center;flex-direction: column;justify-content: center;margin:0;">
                 <h1 style="font-size: 85px;color:rgb(255, 226, 173);font-weight: 900;">PopAcorn</h1>
             </div>
-            <div
+            <div class="headr"
                 style="width:50%; height:100vh;display:flex;align-items: flex-start;flex-direction: column;justify-content: center;background-color: rgb(240, 240, 240);margin:0;">
                 <div
                     style="width:100%;display:flex;align-items: flex-start;flex-direction: column;text-align: start;height:50vh;justify-content: flex-end;">
@@ -48,7 +61,7 @@
                         Elevate
                         your snacking experience with
                         handcrafted gourmet popcorn creations.</h4>
-                    <div style="display:flex;flex-direction: row;margin-left:50px;margin-top:10px;">
+                    <div id="headbuttons" style="display:flex;flex-direction: row;margin-left:50px;margin-top:10px;">
                         <button class="primaryBtn">Order Now</button>
                         <button class="secondaryBtn" style="margin-left:10px">Follow Us</button>
                     </div>
@@ -57,12 +70,12 @@
 
 
         </div>
-        <div class="main-content" style="display:flex;flex-direction: row;padding:0;margin-top:90vh">
-            <div style="width:50%;padding:0;margin:0;">
+        <div id="candc" class="main-content" style="display:flex;flex-direction: row;padding:0;margin-top:90vh">
+            <div style="width:50%;padding:0;margin:0;" class="mca">
                 <img src="./assets/mains2.jpg"
                     style='height: 100vh;min-width: 100%;width:100%;object-fit: cover;margin:0' alt="" />
             </div>
-            <div
+            <div class="mca"
                 style="width:50%;padding:0;margin:0;display:flex;align-items: center;flex-direction: column;justify-content: center;padding:50px;">
                 <h1 style="font-weight:900;font-size:55px;text-align: center;margin:0;margin-bottom:2px;">COOKIES AND
                     CREAM</h1>
@@ -131,8 +144,8 @@
             </h4>
 
         </div>
-        <div class="main-content" style="display:flex;flex-direction: row;padding:0;margin-top:0px">
-            <div
+        <div class="main-content" id="feat" style="display:flex;flex-direction: row;padding:0;margin-top:0px">
+            <div class="mca2"
                 style="width:50%;padding:0;margin:0;display:flex;align-items: center;flex-direction: column;justify-content: center;padding:50px;">
                 <div style="padding:10px;" id="rebadge">
                     <p style="margin:0">RECOMMENDED</p>
@@ -141,25 +154,28 @@
                     style="font-weight:900;font-size:65px;text-align: center;margin:0;margin-bottom:2px;margin-top:5px;">
                     CLASSIC<br> CARAMEL</h1>
                 <button class="primaryBtn">Order Now</button>
-                <div
+                <div id="reviews"
                     style="display:flex;flex-direction: row;justify-content:center;padding:5px;width:100%;margin-top:20px; ">
                     <div class="review">
-                        <div style="display:flex;flex-direction:row;">
-                            <span class="material-symbols-outlined">
-                                star
-                            </span>
-                            <span class="material-symbols-outlined">
-                                star
-                            </span>
-                            <span class="material-symbols-outlined">
-                                star
-                            </span>
-                            <span class="material-symbols-outlined">
-                                star
-                            </span>
-                            <span class="material-symbols-outlined">
-                                star
-                            </span>
+                        <div class="rhead" style="display:flex;flex-direction:row;">
+                            <div style="display:flex;flex-direction: row;">
+                                <span class="material-symbols-outlined">
+                                    star
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    star
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    star
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    star
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    star
+                                </span>
+                            </div>
+
                             <p style="margin:0;margin-left:auto">Navid K.</p>
 
                         </div>
@@ -167,22 +183,24 @@
                         <p style="margin:0;font-size:18px;font-weight: 600;">Good Taste</p>
                     </div>
                     <div class="review">
-                        <div style="display:flex;flex-direction:row;">
-                            <span class="material-symbols-outlined">
-                                star
-                            </span>
-                            <span class="material-symbols-outlined">
-                                star
-                            </span>
-                            <span class="material-symbols-outlined">
-                                star
-                            </span>
-                            <span class="material-symbols-outlined">
-                                star
-                            </span>
-                            <span class="material-symbols-outlined">
-                                star
-                            </span>
+                        <div class="rhead" style="display:flex;flex-direction:row;">
+                            <div style="display:flex;flex-direction: row;">
+                                <span class="material-symbols-outlined">
+                                    star
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    star
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    star
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    star
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    star
+                                </span>
+                            </div>
                             <p style="margin:0;margin-left:auto">Humaira S.</p>
 
                         </div>
@@ -192,8 +210,8 @@
                     </div>
                 </div>
             </div>
-            <div style="width:50%;padding:0;margin:0;">
-                <img src="./assets/classiccaramel.jpg"
+            <div class="mca" style="width:50%;padding:0;margin:0;">
+                <img class="mca" src="./assets/classiccaramel.jpg"
                     style='height: 100vh;min-width: 100%;width:100%;object-fit: cover;margin:0' alt="" />
             </div>
 
@@ -212,7 +230,7 @@
         </div>
         <div class="main-content" id="contact"
             style="display:flex;flex-direction: row;padding:30px;margin:0;align-items: center;height:80vh;justify-content: center">
-            <div style="width:33%;margin:20px;">
+            <div class="mca" style="width:33%;margin:20px;">
                 <img src="./assets/contactimg.jpg"
                     style='height: 70vh;min-width: 100%;width:100%;object-fit: cover;margin:0;border-radius:25px'
                     alt="" />
@@ -248,7 +266,8 @@
                 </div>
             </div>
         </div>
-        <div class="main-content" style="height:10vh;width:100%;margin:0;background-color: #013a46;display:flex;justify-content: center;align-items: center;">
+        <div class="main-content"
+            style="height:10vh;width:100%;margin:0;background-color: #013a46;display:flex;justify-content: center;align-items: center;">
             <p style="color:white;">Popacorn 2024 - Designed by Revvifi</p>
         </div>
 

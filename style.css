@@ -1,156 +1,338 @@
+#navlinks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .backgroundImg {
   width: 100%;
   height: 100vh;
   right: 0px;
-  position:absolute;
+  position: absolute;
   top: 0;
-  margin:0;
+  margin: 0;
   z-index: -1;
 
 }
+
 #rebadge {
-  background-color:rgb(255, 245, 233);
-  border-radius:10px;
+  background-color: rgb(255, 245, 233);
+  border-radius: 10px;
   font-weight: 300;
 }
+
 .main-content {
-  position:relative;
-  height:100vh;
-  margin:0;
-  margin-top:100vh;
+  position: relative;
+  height: 100vh;
+  margin: 0;
+  margin-top: 100vh;
 }
-html,body {
-  margin:0;
-  padding:0;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
   font-family: "DM Sans", sans-serif;
 }
+
 #head-content {
-  width:100%;
+  width: 100%;
   position: absolute;
-  top:0;
-  text-align:center;
-  color:black;
+  top: 0;
+  text-align: center;
+  color: black;
   justify-content: center;
   align-items: center;
-  display:flex;
+  display: flex;
   flex-direction: row;
-  height:100vh;
+  height: 100vh;
   z-index: 5;
 }
 
-#headContent2 {
+#headContent2 {}
 
-}
 .navBar {
-  position:relative;
+  position: relative;
   background-color: rgb(53, 53, 53);
-  height:10vh;
-  width:100%;
-  top:0;
-  color:white;
-  display:flex;
+  height: 10vh;
+  width: 100%;
+  top: 0;
+  color: white;
+  display: flex;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 2px 2px 0 #000;
   display: flex;
-  z-index:50;
+  z-index: 50;
   align-items: center;
   justify-content: flex-start;
 }
-.navBar h4{
-  font-size:20px;
+
+.navBar h4 {
+  font-size: 20px;
 }
+
 .product h1 {
-  margin:0;
-  font-size:30px;
-  margin-top:0px;
-  margin-bottom:5px;
+  margin: 0;
+  font-size: 30px;
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
+
 .product h4 {
-  margin:0;
-  margin-top:2px;
-  font-weight:500;
-  margin-bottom:7px;
-  font-size:20px;
+  margin: 0;
+  margin-top: 2px;
+  font-weight: 500;
+  margin-bottom: 7px;
+  font-size: 20px;
 }
+
 .cu {
   transition-duration: 2s;
 }
+
 .cu:hover {
   text-decoration: underline;
 }
+
 .product {
   border-radius: 25px;
-  background-color:rgb(255, 252, 248);
-  display:flex;
-  margin-right:20px;
-  margin-bottom:20px;
-  padding:2px;
+  background-color: rgb(255, 252, 248);
+  display: flex;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 2px;
   align-items: center;
   flex-direction: column;
 }
+
 #featured {
   background-color: rgb(255, 243, 227);
-  height:auto;
+  height: auto;
 }
+
 .pimg img {
   height: 330px;
   overflow: hidden;
   width: 330px;
-  margin:10px;
-  border-radius: 25px;;
+  margin: 10px;
+  border-radius: 25px;
+  ;
   object-fit: cover;
   transition: all .3s ease;
 }
+
 #insta {
   transition-duration: 0.3s;
 }
+
 #insta:hover {
   background-color: rgb(171, 39, 201) !important;
 }
+
 #faceb {
   transition-duration: 0.3s;
 }
+
 #faceb:hover {
   background-color: #3b5998 !important;
 }
+
 #contact {
   background-color: rgb(255, 244, 208);
 }
+
 #about {
   background-color: rgb(247, 247, 247);
 }
+
 #dlvryinfo {
   background-color: rgb(255, 246, 226);
 }
+
 .pimg img:hover {
   transform: scale(1.02);
 }
 
 .primaryBtn {
   padding: 10px 25px 10px 25px;
-  background-color:rgb(26, 26, 26);
-  color:white;
-  font-size:19px;
+  background-color: rgb(26, 26, 26);
+  color: white;
+  font-size: 19px;
   font-weight: 300;
-  border:none;
-  border-radius:20px;
+  border: none;
+  border-radius: 20px;
 }
+
 .review span {
   color: rgb(100, 152, 255)
 }
+
 .secondaryBtn {
   padding: 10px 17px 10px 17px;
   background-color: rgb(255, 255, 255);
   color: rgb(10, 10, 10);
   font-size: 21px;
-  border:1px solid black;
+  border: 1px solid black;
   font-weight: 300;
   border-radius: 20px;
 }
+#mbar {
+  display: none;
+}
+#menu {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  margin-top:10vh;
+  height:90vh;
+  background-color: rgb(53, 53, 53);
+  z-index: 90;
+  display:none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#menu h4 {
+  margin:5px !important;
+  color:white;
+  width:80%;
+  font-size:50px;
+  margin-left:0px !important;
+  text-align: left !important;
+}
+
 .review {
-  padding:15px;
-  width:40%;
-  border-radius:15px;
-  border:1px solid black;
-  margin:5px;
-  height:150px;
+  padding: 15px;
+  width: 40%;
+  border-radius: 15px;
+  border: 1px solid black;
+  margin: 5px;
+  height: 150px;
+}
+
+@media only screen and (max-width: 900px) {
+  #navlinks {
+    display: none;
+  }
+
+  .headl {
+    display: none !important;
+  }
+
+  .headr {
+    width: auto !important;
+  }
+
+  .headr h4 {
+    width: 80% !important;
+  }
+
+  .headr h1,
+  .headr h4,
+  #headbuttons {
+    margin-left: 10px !important;
+  }
+
+  #candc {
+    flex-direction: column !important;
+  }
+
+  #candc img {
+    height: 50vh !important;
+    width: 100% !important;
+  }
+
+  #candc div {
+    padding: 0 !important;
+  }
+
+  #candc h4 {
+    margin: 10px !important;
+  }
+
+  #candc h1 {
+    font-size: 45px !important;
+  }
+
+  .mca {
+    height: 50vh !important;
+    width: 100% !important;
+
+  }
+
+  .pimg img {
+    height: 75px !important;
+    width: 80vw !important;
+  }
+  .mca2 {
+    width: 100% !important;
+    height:auto !important;
+    padding:0px !important;
+    margin-top:30px !important;
+    margin-bottom:50px !important;
+  }
+  #about h1 { 
+    font-size:40px !important;
+  }
+  #about h4 {
+    font-size:20px !important;
+  }
+  .rhead {
+    flex-direction: column-reverse !important;
+  }
+  .rhead p {
+    margin-left:3px !important;
+  }
+  .product {
+    text-align: center;
+  }
+  .review p {
+    font-size:15px !important;
+  }
+  #dlvryinfo {
+    height:auto !important;
+    padding-top:30px !important;
+    padding-bottom:30px !important; 
+    text-align: center;
+  }
+  #reviews {
+    padding:0 !important
+  }
+  #feat img {
+    height: 50vh !important;
+    width: 100% !important;
+  }
+
+  #feat {
+    flex-direction: column-reverse !important;
+    height:auto !important;
+  }
+  #contact div{
+    padding:0 !important;
+  }
+  #contact img {
+    height: 30vh !important;
+    width:80% !important;
+    min-width: 60% !important;
+  }
+  #contact .mca {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin:10px !important;
+    height:auto !important;
+  }
+  #contact {
+    padding:0 !important;
+    flex-direction: column !important;
+  }
+  #mbar {
+    display:block;
+    margin-left:auto;
+    width:10%;
+    font-size:30px;
+  }
+  .navBar {
+    position:sticky !important;
+  }
 }
