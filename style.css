@@ -4,6 +4,7 @@
   right: 0px;
   position:absolute;
   top: 0;
+  margin:0;
   z-index: -1;
 
 }
@@ -15,6 +16,7 @@
 .main-content {
   position:relative;
   height:100vh;
+  margin:0;
   margin-top:100vh;
 }
 html,body {
@@ -69,9 +71,15 @@ html,body {
   margin-bottom:7px;
   font-size:20px;
 }
+.cu {
+  transition-duration: 2s;
+}
+.cu:hover {
+  text-decoration: underline;
+}
 .product {
   border-radius: 25px;
-  background-color:rgb(255, 247, 237);
+  background-color:rgb(255, 252, 248);
   display:flex;
   margin-right:20px;
   margin-bottom:20px;
@@ -80,7 +88,7 @@ html,body {
   flex-direction: column;
 }
 #featured {
-  background-color: antiquewhite;
+  background-color: rgb(255, 243, 227);
   height:auto;
 }
 .pimg img {
@@ -92,8 +100,26 @@ html,body {
   object-fit: cover;
   transition: all .3s ease;
 }
+#insta {
+  transition-duration: 0.3s;
+}
+#insta:hover {
+  background-color: rgb(171, 39, 201) !important;
+}
+#faceb {
+  transition-duration: 0.3s;
+}
+#faceb:hover {
+  background-color: #3b5998 !important;
+}
+#contact {
+  background-color: rgb(255, 244, 208);
+}
 #about {
   background-color: rgb(247, 247, 247);
+}
+#dlvryinfo {
+  background-color: rgb(255, 246, 226);
 }
 .pimg img:hover {
   transform: scale(1.02);
@@ -104,16 +130,27 @@ html,body {
   background-color:rgb(26, 26, 26);
   color:white;
   font-size:19px;
-  font-weight: 400;
+  font-weight: 300;
   border:none;
   border-radius:20px;
+}
+.review span {
+  color: rgb(100, 152, 255)
 }
 .secondaryBtn {
   padding: 10px 17px 10px 17px;
   background-color: rgb(255, 255, 255);
   color: rgb(10, 10, 10);
   font-size: 21px;
-  font-weight: 600;
-  border: none;
+  border:1px solid black;
+  font-weight: 300;
   border-radius: 20px;
+}
+.review {
+  padding:15px;
+  width:40%;
+  border-radius:15px;
+  border:1px solid black;
+  margin:5px;
+  height:150px;
 }
