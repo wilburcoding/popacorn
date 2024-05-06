@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-grow: 1;
 }
 
 .backgroundImg {
@@ -70,6 +71,12 @@ body {
   font-size: 20px;
 }
 
+#navlinks i {
+  margin-left: auto;
+  font-size: 25px;
+  margin-right: 20px;
+}
+
 .product h1 {
   margin: 0;
   font-size: 30px;
@@ -80,7 +87,7 @@ body {
 .product h4 {
   margin: 0;
   margin-top: 2px;
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 7px;
   font-size: 20px;
 }
@@ -104,9 +111,17 @@ body {
   flex-direction: column;
 }
 
+#store .product {
+  background-color: rgb(255, 241, 224);
+}
+
 #featured {
   background-color: rgb(255, 243, 227);
   height: auto;
+}
+
+#store {
+  background-color: white;
 }
 
 .pimg img {
@@ -175,29 +190,29 @@ body {
   font-weight: 300;
   border-radius: 20px;
 }
-#mbar {
-  display: none;
-}
+
+
 #menu {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  margin-top:10vh;
-  height:90vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-top: 10vh;
+  height: 90vh;
   background-color: rgb(53, 53, 53);
   z-index: 90;
-  display:none;
+  display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
+
 #menu h4 {
-  margin:5px !important;
-  color:white;
-  width:80%;
-  font-size:50px;
-  margin-left:0px !important;
+  margin: 5px !important;
+  color: white;
+  width: 80%;
+  font-size: 50px;
+  margin-left: 0px !important;
   text-align: left !important;
 }
 
@@ -209,18 +224,33 @@ body {
   margin: 5px;
   height: 150px;
 }
+
 .menulink {
-  height:50px;
+  height: 50px;
 }
+
+#mbar {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  font-size: 30px;
+  margin-right:max(2%, 15px);
+}
+#mbar i {
+  margin-left: 15px;
+  font-size:25px;
+
+  
+}
+
 @media only screen and (max-width: 900px) {
-  #navlinks {
-    display: none;
-  }
 
   .headl {
     display: none !important;
   }
-
+  #mbar i {
+    font-size:20px;
+  }
   .headr {
     width: auto !important;
   }
@@ -266,40 +296,50 @@ body {
     height: 75px !important;
     width: 80vw !important;
   }
+
   .mca2 {
     width: 100% !important;
-    height:auto !important;
-    padding:0px !important;
-    margin-top:30px !important;
-    margin-bottom:50px !important;
+    height: auto !important;
+    padding: 0px !important;
+    margin-top: 30px !important;
+    margin-bottom: 50px !important;
   }
-  #about h1 { 
-    font-size:40px !important;
+
+  #about h1 {
+    font-size: 40px !important;
   }
+
   #about h4 {
-    font-size:20px !important;
+    font-size: 20px !important;
   }
+
   .rhead {
     flex-direction: column-reverse !important;
   }
+
   .rhead p {
-    margin-left:3px !important;
+    margin-left: 3px !important;
   }
+
   .product {
     text-align: center;
   }
+
   .review p {
-    font-size:15px !important;
+    font-size: 15px !important;
   }
+
   #dlvryinfo {
-    height:auto !important;
-    padding-top:30px !important;
-    padding-bottom:30px !important; 
+    height: auto !important;
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
     text-align: center;
   }
+
   #reviews {
-    padding:0 !important
+    padding: 0 !important
   }
+
   #feat img {
     height: 50vh !important;
     width: 100% !important;
@@ -307,34 +347,33 @@ body {
 
   #feat {
     flex-direction: column-reverse !important;
-    height:auto !important;
+    height: auto !important;
   }
-  #contact div{
-    padding:0 !important;
+
+  #contact div {
+    padding: 0 !important;
   }
+
   #contact img {
     height: 30vh !important;
-    width:80% !important;
+    width: 80% !important;
     min-width: 60% !important;
   }
+
   #contact .mca {
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin:10px !important;
-    height:auto !important;
+    margin: 10px !important;
+    height: auto !important;
   }
+
   #contact {
-    padding:0 !important;
+    padding: 0 !important;
     flex-direction: column !important;
   }
-  #mbar {
-    display:block;
-    margin-left:auto;
-    width:10%;
-    font-size:30px;
-  }
+
   .navBar {
-    position:sticky !important;
+    position: sticky !important;
   }
 }

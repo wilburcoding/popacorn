@@ -32,7 +32,7 @@ window.onload = function () {
       $("#mbar").animate({
         opacity: 0
       }, 100, function () {
-        $("#mbar").html('<i class="fa-solid fa-bars"></i>')
+        $("#mbar").html('<i class="fa-solid fa-bag-shopping"></i><i class="fa-solid fa-bars"></i>')
         $("#mbar").animate({
           opacity: 1
         }, 100)
