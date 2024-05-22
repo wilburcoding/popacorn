@@ -1,6 +1,6 @@
 window.onload = function () {
   let mobile = false;
-  $("#mbar").on("click", function() {
+  $(".mbarc").on("click", function() {
     if (!mobile) {
       $("#menu").css("opacity", 0);
       $("#menu").css("display", "flex");
@@ -13,7 +13,9 @@ window.onload = function () {
       $("#mbar").animate({
         opacity:0
       }, 100, function() {
-        $("#mbar").html('<i class="fa-solid fa-xmark"></i>')
+        $(".mab").css("display", "none");
+        $(".mas").css("display", "none");
+        $("#x").attr("style","display:block");
         $("#mbar").animate({
           opacity: 1
         }, 100)
@@ -32,7 +34,9 @@ window.onload = function () {
       $("#mbar").animate({
         opacity: 0
       }, 100, function () {
-        $("#mbar").html('<i class="fa-solid fa-bag-shopping"></i><i class="fa-solid fa-bars"></i>')
+        $("#x").attr("style","display:none")
+        $(".mab").css("display","block")
+        $(".mas").css("display","block")
         $("#mbar").animate({
           opacity: 1
         }, 100)
