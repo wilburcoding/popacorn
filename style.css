@@ -213,11 +213,15 @@ body {
 }
 
 #productImg {
-  width: 50%;
+  width:60%;
   height: 100vh;
   object-fit: cover;
 }
-
+#productDetails {
+  width:30%;
+  height:100vh;
+  padding:30px;
+}
 #productInfo {
   top: 0;
   left: 0;
@@ -236,7 +240,7 @@ body {
   margin-top: 10vh;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom:10vh;
 }
 
