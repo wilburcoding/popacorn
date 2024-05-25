@@ -295,7 +295,7 @@ body {
   }
 
   .headr {
-    width: auto !important;
+    width: 100vw !important;
   }
 
   .headr h4 {
