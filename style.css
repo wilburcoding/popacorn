@@ -122,6 +122,7 @@ body {
 
 #store {
   background-color: white;
+  display:none;
 }
 
 .pimg img {
@@ -211,6 +212,34 @@ body {
   flex-direction: column;
 }
 
+#productImg {
+  width: 50%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+#productInfo {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background-color: rgb(220, 220, 220);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+#productContent {
+  width: 80%;
+  margin-top: 10vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom:10vh;
+}
+
 #menu h4 {
   margin: 5px !important;
   color: white;
@@ -229,9 +258,10 @@ body {
   height: 150px;
 }
 
-#x{
-  display:none;
+#x {
+  display: none;
 }
+
 .menulink {
   height: 50px;
 }
