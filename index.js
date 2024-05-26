@@ -37,8 +37,23 @@ const PRODUCTS = {
     "addons": ["Butter", "White Chocolate", "Dark Chocolate Drizzle", "Chocolate Chip", "Cashew Nut", "Peanut Butter"]
   }
 }
+let currentItem = null;
 window.onload = function () {
   let mobile = false;
+  
+  function updateCartCount() {
+    if (localStorage.getItem("cart") !== null) {
+      const dat = JSON.parse(localStorage.getItem("cart"));
+      console.log(dat);
+      $("#cartCountP").html(dat.length);
+      $("#cartCount").css('display', 'flex');
+
+    } else {
+      $("#cartCount").css('display', 'none');
+
+    }
+  }
+  updateCartCount();
   $(".mbarc").on("click", function () {
     if (!mobile) {
       $("#menu").css("opacity", 0);
@@ -86,11 +101,35 @@ window.onload = function () {
   $("#returnStore").click(function() {
     $("#productInfo").animate({
       opacity: 0,
-    }, 500, function() {
+    }, 200, function() {
       $("#productInfo").css('display', "none");
       $("#store").css("display", "flex");
 
     })
+  })
+  $("#addToCart").click(function() {
+    let cart = [];
+    if (localStorage.getItem("cart") !== null) {
+      cart = JSON.parse(localStorage.getItem("cart"));
+    } else {
+      
+    }
+    let addOns = {};
+    $('.options').each(function (i, obj) {
+        addOns[$(this).attr("id")] = {
+        "val":$(this).hasClass("checked"),
+        "name": String($("#" + $(this).attr("id") + " p").html()).substring(2)
+      }
+    });
+    console.log(addOns);
+    cart.push({
+      "id":currentItem,
+      "addons":addOns,
+      "portion":$("#portion").val()
+    })
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+
   })
   $(".product").click(function () {
     const ID = $(this).attr("id");
@@ -99,11 +138,12 @@ window.onload = function () {
     $("#productCost").html(data.cost);
     $("#productDesc").html(data.desc);
     $("#productImg").attr("src", data.img);
+    currentItem = ID;
     $("#addons").html("");
     for (let item of data.addons) {
       $("#addons").append(`
-        <div class="options">
-          <div id="option${String(item).replace(" ","").toLowerCase()}" class="checkbox unchecked">
+        <div class="options" id="option${String(item).replace(" ", "").toLowerCase()}" >
+          <div class="checkbox unchecked">
             <i class="fa-solid fa-check"></i>
           </div>
           <p>+ ${item}</p>

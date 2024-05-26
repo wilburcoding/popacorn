@@ -30,7 +30,12 @@
 
 
       <div id="mbar">
-        <i class="fa-solid fa-bag-shopping mas"></i>
+        <div class="mas">
+          <i class="fa-solid fa-bag-shopping" style="margin:0;"></i>
+          <div id="cartCount">
+            <p id="cartCountP"></p>
+          </div>
+        </div>
         <i class="fa-solid fa-bars mab mbarc"></i>
         <i class="fa-solid fa-xmark max mbarc" id="x"></i>
 
@@ -56,7 +61,7 @@
             Cheese Popcorn
             and indulge in the irresistible combination of flavors with every bite.</p>
           <p style="font-size:22px;margin:0;font-weight:600">Portion</p>
-          <select style="margin-bottom:20px;">
+          <select style="margin-bottom:20px;" id="portion">
             <option value="large">Large</option>
             <option value="small">Small</option>
           </select>
@@ -100,7 +105,7 @@
             </div>
           </div>
           <p style="margin:0;font-size:20px;font-weight:600">In Stock</p>
-          <button class="primaryBtn">Add to Cart</button>
+          <button class="primaryBtn" id="addToCart">Add to Cart</button>
 
 
 
