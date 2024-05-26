@@ -134,8 +134,8 @@
           addonstext+=addon.name;
           addonscount +=1;
         }
-        console.log(addonstext)
-        let secondaryCosts = 0;
+        let secondaryCosts = addonscount * 2;
+        const final = primaryCost + secondaryCosts
 
         $("#cartItems").append(`
           <div class="cartItem">
@@ -150,8 +150,8 @@
             </div>
             <div class="costInfo">
               <p class="primaryCost">৳${formatter.format(primaryCost)}</p>
-              <p>৳40.00</p>
-              <p class="finalCost">৳130.00</p>
+              <p>৳${formatter.format(secondaryCosts)}</p>
+              <p class="finalCost">৳${formatter.format(final)}</p>
             </div>
           </div>
           `
