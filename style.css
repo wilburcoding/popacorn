@@ -268,20 +268,22 @@ body {
 }
 #returnStore {
   transition-duration:0.3s;
-  color: rgb(122, 122, 122)
+  color: rgb(122, 122, 122);
+  padding:5px;
+  width:auto;
 }
 #returnStore:hover {
   color:#383838;
 }
 #productImg {
   width: 65%;
-  height: 100vh;
+  height: 110vh;
   object-fit: cover;
 }
 
 #productDetails {
   width: 30%;
-  height: 100vh;
+  height: 110vh;
   padding: 30px;
 }
 
