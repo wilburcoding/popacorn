@@ -105,6 +105,10 @@ window.onload = function () {
 
     })
   })
+  $("#mlStore").click(() => window.location.href="./store.html");
+  $("#mlDelivery").click(() => window.location.href = "./index.html#dlvryinfo");
+  $("#mlContact").click(() => window.location.href = "./index.html#contact");
+  
   $("#addToCart").click(function() {
     let cart = [];
     if (localStorage.getItem("cart") !== null) {
