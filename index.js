@@ -68,7 +68,6 @@ window.onload = function () {
         opacity: 0
       }, 100, function () {
         $(".mab").css("display", "none");
-        $(".mas").css("display", "none");
         $("#x").attr("style", "display:block");
         $("#mbar").animate({
           opacity: 1
@@ -90,7 +89,6 @@ window.onload = function () {
       }, 100, function () {
         $("#x").attr("style", "display:none")
         $(".mab").css("display", "block")
-        $(".mas").css("display", "block")
         $("#mbar").animate({
           opacity: 1
         }, 100)
