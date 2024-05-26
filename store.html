@@ -47,18 +47,60 @@
       <div id="productContent">
         <img src="./assets/garliccheese.jpg" id="productImg">
         <div id="productDetails">
+          <p id="returnStore" style="margin:0;">Back to Store</p>
           <h1 style="font-size:70px;margin:0;font-weight: 900;line-height:70px;">Garlic Cheese</h1>
-          <h2 style="font-size:45px;margin:0;font-weight: 200;margin-bottom:20px;">৳90.00</h2>
+          <h2 style="font-size:45px;margin:0;font-weight: 200">৳90.00</h2>
+          <p style="margin:0;margin-bottom:20px;font-size:16px;font-weight: 300;">Savor the robust taste of
+            garlic-infused cheese enveloping each fluffy popcorn piece. It's a snack that speaks for
+            itself—bold, cheesy, and utterly satisfying. Treat yourself to the straightforward pleasure of our Garlic
+            Cheese Popcorn
+            and indulge in the irresistible combination of flavors with every bite.</p>
           <p style="font-size:22px;margin:0;font-weight:600">Portion</p>
           <select style="margin-bottom:20px;">
             <option value="large">Large</option>
             <option value="small">Small</option>
           </select>
           <p style="font-size:22px;margin:0;font-weight:600">Add Ons</p>
-          <div class="options">
-          <input type="checkbox" id="cheese" name="cheese" />
-          <p>Cheese</p>
+          <div id="addons">
+            <div id="optioncheese" class="options">
+              <div class="checkbox unchecked">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <p>+ Cheese</p>
+            </div>
+            <div class="options">
+              <div id="optiongarlic" class="checkbox unchecked">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <p>+ Garlic</p>
+            </div>
+            <div class="options">
+              <div id="optionmustard" class="checkbox unchecked">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <p>+ Mustard</p>
+            </div>
+            <div class="options">
+              <div id="optionpaprika" class="checkbox unchecked">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <p>+ Paprika</p>
+            </div>
+            <div class="options">
+              <div id="optiondc" class="checkbox unchecked">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <p>+ Dried Capsicum</p>
+            </div>
+            <div class="options">
+              <div id="optionbutter" class="checkbox unchecked">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <p>+ Butter</p>
+            </div>
           </div>
+          <p style="margin:0;font-size:20px;font-weight:600">In Stock</p>
+          <button class="primaryBtn">Add to Cart</button>
 
 
 
@@ -68,35 +110,35 @@
     <div class="main-content" id="store" style="flex-direction: column;padding:30px;margin-top:0;align-items: center;">
       <div
         style="display:flex;flex-direction: row;width:100%;max-width:1200px;flex-flow: wrap;align-items: center;justify-content: center;margin-bottom:50px;">
-        <div class="product">
+        <div class="product" id="garliccheese">
           <div class="pimg">
             <img src="./assets/garliccheese.jpg">
           </div>
           <h1>Garlic Cheese</h1>
           <h4>৳90.00</h4>
         </div>
-        <div class="product">
+        <div class="product" id="cheesecaramel">
           <div class="pimg">
             <img src="./assets/cheesecaramel.jpg">
           </div>
           <h1>Cheese Caramel</h1>
           <h4>৳100.00</h4>
         </div>
-        <div class="product">
+        <div class="product" id="caramelchocolate">
           <div class="pimg">
             <img src="./assets/chocolatecaramel.jpg">
           </div>
           <h1>Chocolate Caramel</h1>
           <h4>৳100.00</h4>
         </div>
-        <div class="product">
+        <div class="product" id="classiccaramel">
           <div class="pimg">
             <img src="./assets/classiccaramel.jpg">
           </div>
           <h1>Classic Salted Caramel</h1>
           <h4>৳90.00</h4>
         </div>
-        <div class="product">
+        <div class="product" id="cookiesandcream">
           <div class="pimg">
             <img src="./assets/cookiesandcream.jpg">
           </div>
