@@ -40,7 +40,7 @@ const PRODUCTS = {
 let currentItem = null;
 window.onload = function () {
   let mobile = false;
-  
+
   function updateCartCount() {
     if (localStorage.getItem("cart") !== null) {
       const dat = JSON.parse(localStorage.getItem("cart"));
@@ -96,38 +96,38 @@ window.onload = function () {
       mobile = false;
     }
   })
-  $("#returnStore").click(function() {
+  $("#returnStore").click(function () {
     $("#productInfo").animate({
       opacity: 0,
-    }, 200, function() {
+    }, 200, function () {
       $("#productInfo").css('display', "none");
       $("#store").css("display", "flex");
 
     })
   })
-  $("#mlStore").click(() => window.location.href="./store.html");
+  $("#mlStore").click(() => window.location.href = "./store.html");
   $("#mlDelivery").click(() => window.location.href = "./index.html#dlvryinfo");
   $("#mlContact").click(() => window.location.href = "./index.html#contact");
-  
-  $("#addToCart").click(function() {
+
+  $("#addToCart").click(function () {
     let cart = [];
     if (localStorage.getItem("cart") !== null) {
       cart = JSON.parse(localStorage.getItem("cart"));
     } else {
-      
+
     }
     let addOns = {};
     $('.options').each(function (i, obj) {
-        addOns[$(this).attr("id")] = {
-        "val":$(this).hasClass("checked"),
+      addOns[$(this).attr("id")] = {
+        "val": $(this).find(">:first-child").hasClass("checked"),
         "name": String($("#" + $(this).attr("id") + " p").html()).substring(2)
       }
     });
     console.log(addOns);
     cart.push({
-      "id":currentItem,
-      "addons":addOns,
-      "portion":$("#portion").val()
+      "id": currentItem,
+      "addons": addOns,
+      "portion": $("#portion").val()
     })
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();

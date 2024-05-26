@@ -52,17 +52,111 @@
       <hr style="color:black;width:100%">
       <div id="cmain">
         <h4 id="empty">Your cart is empty</h4>
-        <button class="secondaryBtn">Store</button>
+        <div id="cartItems">
+          <div class="cartItem">
+            <div class="delete">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+            <img src="./assets/cookiesandcream.jpg" />
+            <div class="itemInfo">
+              <h3>Chocolate Caramel</h3>
+              <p>Addons: Butter, Chocolate Chip, Dark Chocolate Drizzle</p>
+
+            </div>
+            <div class="costInfo">
+              <p class="primaryCost">৳90.00</p>
+              <p>৳40.00</p>
+              <p class="finalCost">৳130.00</p>
+            </div>
+          </div>
+        </div>
+        <button class="secondaryBtn" id="storeL">Store</button>
 
       </div>
     </div>
   </main>
   <script src="index.js"></script>
   <script>
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'decimal',
+      maximumFractionDigits:2,
+      minimumFractionDigits:2
+      
+    });
+
     if (localStorage.getItem("cart") != null) {
       $("#empty").css("display", "none");
+      $("#storeL").css('display', "none");
+      const PRODUCTS = {
+        "garliccheese": {
+          "img": "./assets/garliccheese.jpg",
+          "title": "Garlic Cheese",
+          "cost": 90.00,
+        },
+        "cheesecaramel": {
+          "img": "./assets/cheesecaramel.jpg",
+          "title": "Cheese Caramel",
+          "cost": 100.00,
+        },
+        "caramelchocolate": {
+          "img": "./assets/chocolatecaramel.jpg",
+          "cost": 100.00,
+          "title": "Chocolate Caramel",
+        },
+        "classiccaramel": {
+          "img": "./assets/classiccaramel.jpg",
+          "cost": 90.00,
+          "title": "Classic Salted Caramel",
+        },
+        "cookiesandcream": {
+          "img": "./assets/cookiesandcream.jpg",
+          "cost": 100.00,
+          "title": "Cookies and Cream",
+        }
+      }
       let cart = JSON.parse(localStorage.getItem('cart'));
-      console.log(cart);
+      for (let item of cart) {
+
+        const productData = PRODUCTS[item.id];
+        console.log(productData.img);
+        const primaryCost = productData.cost;
+        const addons = item.addons;
+        let addonscount = 0;
+        let addonstext = "";
+        for (let addondat of Object.keys(addons)) {
+          const addon = addons[addondat];
+          if (addon.val == false) {
+            continue;
+          }
+          if (addonscount != 0) {
+            addonstext+=", ";
+          }
+          addonstext+=addon.name;
+          addonscount +=1;
+        }
+        console.log(addonstext)
+        let secondaryCosts = 0;
+
+        $("#cartItems").append(`
+          <div class="cartItem">
+            <div class="delete">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+            <img src="${productData.img}"/>
+            <div class="itemInfo">
+              <h3>${productData.title}</h3>
+              <p>Addons: ${addonstext}</p>
+
+            </div>
+            <div class="costInfo">
+              <p class="primaryCost">৳${formatter.format(primaryCost)}</p>
+              <p>৳40.00</p>
+              <p class="finalCost">৳130.00</p>
+            </div>
+          </div>
+          `
+        )
+      }
     }
 
 
