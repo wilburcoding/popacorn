@@ -278,6 +278,7 @@ body {
 #productImg {
   width: 65%;
   height: 110vh;
+  border-radius:10px;
   object-fit: cover;
 }
 
@@ -545,6 +546,17 @@ body {
 
   .navBar {
     position: sticky !important;
+  }
+  #productContent {
+    flex-direction: column;
+  }
+  #productImg {
+    width:100% !important;
+    height:50vh;
+  }
+  #productDetails {
+    width:100% !important;
+
   }
 
 }
