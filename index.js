@@ -144,7 +144,7 @@ window.onload = function () {
     $("#addons").html("");
     for (let item of data.addons) {
       $("#addons").append(`
-        <div class="options" id="option${String(item).replace(" ", "").toLowerCase()}" >
+        <div class="options" id="option${String(item).replaceAll(" ", "").toLowerCase()}" >
           <div class="checkbox unchecked">
             <i class="fa-solid fa-check"></i>
           </div>

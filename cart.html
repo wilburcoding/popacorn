@@ -30,12 +30,16 @@
 
 
       <div id="mbar">
-        <i class="fa-solid fa-bag-shopping mas"></i>
+        <div class="mas">
+          <i class="fa-solid fa-bag-shopping" style="margin:0;"></i>
+          <div id="cartCount">
+            <p id="cartCountP"></p>
+          </div>
+        </div>
         <i class="fa-solid fa-bars mab mbarc"></i>
         <i class="fa-solid fa-xmark max mbarc" id="x"></i>
 
       </div>
-
 
     </div>
     <div id="menu">
@@ -54,6 +58,17 @@
     </div>
   </main>
   <script src="index.js"></script>
+  <script>
+    if (localStorage.getItem("cart") != null) {
+      $("#empty").css("display", "none");
+      let cart = JSON.parse(localStorage.getItem('cart'));
+      console.log(cart);
+    }
+
+
+
+  </script>
+
 
 </body>
 
