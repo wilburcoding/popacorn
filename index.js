@@ -68,6 +68,9 @@ window.onload = function () {
   $(".mas").click(function() {
     window.location.href="/cart.html"
   })
+  $("#orderNow").click(function() {
+    window.location.href="/store.html"
+  })
   $(".mbarc").on("click", function () {
     if (!mobile) {
       $("#menu").css("opacity", 0);
