@@ -420,12 +420,13 @@ body {
   margin-bottom:0;
 
 }
-#price {
+.price {
   display:flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
 }
-#price p {
+.price p {
   margin:0;
 }
 .delete {
