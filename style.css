@@ -590,6 +590,28 @@ body {
 
   }
 
+  .itemInfo h3 {
+    font-size: 16px;
+  }
+
+  .itemInfo p {
+    font-size: 14px;
+  }
+  .primaryCost {
+    font-size:13px;
+  }
+  .secondaryCost {
+    font-size:13px;
+  }
+  .finalCost {
+    font-size: 16px;;
+  }
+
+  #cart {
+    width: 90vw !important;
+    max-width: 500px;
+  }
+
   .pimg img {
     height: 75px !important;
     width: 80vw !important;
