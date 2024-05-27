@@ -60,7 +60,8 @@
               <p style="margin:0;font-weight:600;margin-right:10px;font-size:15px;line-height: 15px;">Subtotal: </p>
 
             </div>
-            <p id="subtp" style="font-weight:300;font-size:15px;line-height:15px;margin-right:0;margin-left:auto;">$15.90</p>
+            <p id="subtp" style="font-weight:300;font-size:15px;line-height:15px;margin-right:0;margin-left:auto;">
+              $15.90</p>
           </div>
           <hr>
           <div class="price">
@@ -68,7 +69,8 @@
               <p style="margin:0;font-weight:600;margin-right:10px;font-size:15px;line-height: 15px;">Delivery Fee: </p>
 
             </div>
-            <p id="subtd" style="font-weight:300;font-size:15px;line-height:15px;margin-right:0;margin-left:auto;">$15.90</p>
+            <p id="subtd" style="font-weight:300;font-size:15px;line-height:15px;margin-right:0;margin-left:auto;">
+              $15.90</p>
           </div>
           <hr>
           <div class="price">
@@ -76,15 +78,18 @@
               <p style="margin:0;font-weight:600;margin-right:10px;font-size:15px;line-height: 15px;">Total: </p>
 
             </div>
-            <p id="finaltotal" style="font-weight:500;font-size:25px;line-height:15px;margin-right:0;margin-left:auto;">$15.90</p>
+            <p id="finaltotal" style="font-weight:500;font-size:25px;line-height:15px;margin-right:0;margin-left:auto;">
+              $15.90</p>
           </div>
-          <button class="primaryBtn" style="width:100%;padding:5px 7px;font-size:17px;margin-top:10px;">Checkout</button>
+          <button class="primaryBtn"
+            style="width:100%;padding:5px 7px;font-size:17px;margin-top:10px;">Checkout</button>
 
         </div>
       </div>
   </main>
   <script src="index.js"></script>
   <script>
+    const MAX_DELIVERY = 5;
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'decimal',
       maximumFractionDigits: 2,
@@ -93,8 +98,7 @@
     });
 
     if (localStorage.getItem("cart") != null) {
-      $("#empty").css("display", "none");
-      $("#storeL").css('display', "none");
+
       const PRODUCTS = {
         "garliccheese": {
           "img": "./assets/garliccheese.jpg",
@@ -124,6 +128,13 @@
       }
       let cart = JSON.parse(localStorage.getItem('cart'));
       let finalcost = 0;
+      if (cart.length == 0) {
+        $("#checkout").css("display", "none");
+      } else {
+        $("#empty").css("display", "none");
+        $("#storeL").css('display', "none");
+      }
+
       for (let item of cart) {
 
         const productData = PRODUCTS[item.id];
@@ -152,7 +163,7 @@
           addonstext = "No Addons";
         }
         const uid = item.uid;
-        finalcost +=final;
+        finalcost += final;
 
         $("#cartItems").append(`
           <div class="cartItem" id="c${uid}">
@@ -177,6 +188,26 @@
           $("#c" + uid).css("display", "none");
           const result = (cart.filter((cartite) => String(cartite.uid) != String(uid)));
           localStorage.setItem("cart", JSON.stringify(result));
+          cart = result;
+          finalcost -= final;
+          if (cart.length == MAX_DELIVERY) {
+            finalcost -= 5;
+          }
+          if (cart.length > MAX_DELIVERY) {
+            $("#subtp").html("৳" + formatter.format(finalcost));
+
+            $("#subtd").html("৳0.00");
+          } else {
+            $("#subtd").html("৳5.00");
+            $("#subtp").html("৳" + formatter.format(finalcost - 5));
+
+          }
+          if (cart.length == 0) {
+            $("#checkout").css("display", "none");
+          }
+
+          $("#finaltotal").html("৳" + formatter.format(finalcost));
+
           if (localStorage.getItem("cart") !== null) {
             const dat = JSON.parse(localStorage.getItem("cart"));
             console.log(dat);
@@ -191,11 +222,11 @@
       }
       $("#subtp").html("৳" + formatter.format(finalcost));
       console.log($("#cartCountP").html())
-      if (cart.length> 5) {
+      if (cart.length > 5) {
         $("#subtd").html("৳0.00");
       } else {
         $("#subtd").html("৳5.00");
-        finalcost+=5;
+        finalcost += 5;
       }
       $("#finaltotal").html("৳" + formatter.format(finalcost));
 
