@@ -189,19 +189,27 @@
           const result = (cart.filter((cartite) => String(cartite.uid) != String(uid)));
           localStorage.setItem("cart", JSON.stringify(result));
           cart = result;
-          finalcost -= final;
-          if (cart.length == MAX_DELIVERY) {
-            finalcost -= 5;
+          finalcost = 0;
+          for (let item of cart) {
+            finalcost+=PRODUCTS[item.id].cost;
+            console.log(item); 
+            for (let addon of Object.values(item.addons)) {
+              if (addon.val) {
+                finalcost+=20;
+              }       
+            }
           }
+          $("#subtp").html("৳" + formatter.format(finalcost));
+
           if (cart.length > MAX_DELIVERY) {
-            $("#subtp").html("৳" + formatter.format(finalcost));
 
             $("#subtd").html("৳0.00");
           } else {
             $("#subtd").html("৳5.00");
-            $("#subtp").html("৳" + formatter.format(finalcost - 5));
+            finalcost+=5;
 
           }
+
           if (cart.length == 0) {
             $("#checkout").css("display", "none");
           }
