@@ -53,35 +53,16 @@
       <div id="cmain">
         <h4 id="empty">Your cart is empty</h4>
         <div id="cartItems">
-          <div class="cartItem">
-            <div class="delete">
-              <i class="fa-solid fa-xmark"></i>
-            </div>
-            <img src="./assets/cookiesandcream.jpg" />
-            <div class="itemInfo">
-              <h3>Chocolate Caramel</h3>
-              <p>Addons: Butter, Chocolate Chip, Dark Chocolate Drizzle</p>
-
-            </div>
-            <div class="costInfo">
-              <p class="primaryCost">৳90.00</p>
-              <p>৳40.00</p>
-              <p class="finalCost">৳130.00</p>
-            </div>
-          </div>
         </div>
-        <button class="secondaryBtn" id="storeL">Store</button>
-
       </div>
-    </div>
   </main>
   <script src="index.js"></script>
   <script>
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'decimal',
-      maximumFractionDigits:2,
-      minimumFractionDigits:2
-      
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2
+
     });
 
     if (localStorage.getItem("cart") != null) {
@@ -129,17 +110,17 @@
             continue;
           }
           if (addonscount != 0) {
-            addonstext+=", ";
+            addonstext += ", ";
           }
-          addonstext+=addon.name;
-          addonscount +=1;
+          addonstext += addon.name;
+          addonscount += 1;
         }
         let secondaryCosts = addonscount * 20.00;
         const final = primaryCost + secondaryCosts;
         if (addonscount == 0) {
-          addonstext ="No Addons";
+          addonstext = "No Addons";
         }
-        
+
         $("#cartItems").append(`
           <div class="cartItem">
             <div class="delete">
