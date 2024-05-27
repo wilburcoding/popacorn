@@ -481,12 +481,15 @@ body {
   margin-right: 10px;
   width: 10vh;
   border-radius: 5px;
+  object-fit: cover;
 }
 
 #cart h1 {
   margin: 5px;
 }
-
+.itemInfo h3 {
+  text-transform: capitalize;
+}
 .mas {
   margin: 0;
   position: relative;
