@@ -38,6 +38,14 @@ const PRODUCTS = {
   }
 }
 let currentItem = null;
+var rand = function () {
+  return Math.random().toString(36).substr(2);
+};
+
+var token = function () {
+  return rand() + rand();
+};
+
 window.onload = function () {
   let mobile = false;
 
@@ -127,7 +135,8 @@ window.onload = function () {
     cart.push({
       "id": currentItem,
       "addons": addOns,
-      "portion": $("#portion").val()
+      "portion": $("#portion").val(),
+      "uid": token()
     })
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();

@@ -123,10 +123,11 @@
         if (addonscount == 0) {
           addonstext = "No Addons";
         }
+        const uid = item.uid;
 
         $("#cartItems").append(`
-          <div class="cartItem">
-            <div class="delete">
+          <div class="cartItem" id="c${uid}">
+            <div class="delete" id="${uid}">
               <i class="fa-solid fa-xmark"></i>
             </div>
             <img src="${productData.img}"/>
@@ -143,6 +144,21 @@
           </div>
           `
         )
+        $("#" + uid).click(function () {
+          $("#c" + uid).css("display", "none");
+          const result = (cart.filter((cartite) => String(cartite.uid) != String(uid)));
+          localStorage.setItem("cart", JSON.stringify(result));
+          if (localStorage.getItem("cart") !== null) {
+            const dat = JSON.parse(localStorage.getItem("cart"));
+            console.log(dat);
+            $("#cartCountP").html(dat.length);
+            $("#cartCount").css('display', 'flex');
+
+          } else {
+            $("#cartCount").css('display', 'none');
+
+          }
+        })
       }
     }
 
