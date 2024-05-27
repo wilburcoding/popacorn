@@ -190,7 +190,8 @@
         })
       }
       $("#subtp").html("৳" + formatter.format(finalcost));
-      if (parseInt($("#cartCountP").val()) > 5) {
+      console.log($("#cartCountP").html())
+      if (cart.length> 5) {
         $("#subtd").html("৳0.00");
       } else {
         $("#subtd").html("৳5.00");
