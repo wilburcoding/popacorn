@@ -101,7 +101,7 @@
         const productData = PRODUCTS[item.id];
         console.log(productData.img);
         let primaryCost = productData.cost;
-        if (item.cost == "small") {
+        if (item.portion == "small") {
           primaryCost -= 37;
         }
         const addons = item.addons;
