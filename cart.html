@@ -52,7 +52,7 @@
       <hr style="color:black;width:100%">
       <div id="cmain">
         <h4 id="empty">Your cart is empty</h4>
-                <button class="secondaryBtn" id="storeL">Store</button>
+        <button class="secondaryBtn" id="storeL">Store</button>
 
         <div id="cartItems">
         </div>
@@ -226,6 +226,7 @@
           if (cart.length == 0) {
             $("#checkout").css("display", "none");
             $("#empty").css('display', "block");
+            $("#storeL").css('display', "block");
           }
 
           $("#finaltotal").html("৳" + formatter.format(finalcost));
