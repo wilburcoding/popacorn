@@ -62,6 +62,9 @@ window.onload = function () {
     }
   }
   updateCartCount();
+  $("#mainNav").click(function() {
+    window.location.href="/";
+  })
   $(".mbarc").on("click", function () {
     if (!mobile) {
       $("#menu").css("opacity", 0);
