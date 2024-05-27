@@ -62,16 +62,16 @@ window.onload = function () {
     }
   }
   updateCartCount();
-  $("#mainNav").click(function() {
-    window.location.href="/";
+  $("#mainNav").click(function () {
+    window.location.href = "/";
   })
-  $(".mas").click(function() {
-    window.location.href="/cart.html"
+  $(".mas").click(function () {
+    window.location.href = "/cart.html"
   })
-  $("#orderNow").click(function() {
-    window.location.href="/store.html"
+  $("#orderNow").click(function () {
+    window.location.href = "/store.html"
   })
-  $("#followUs").click(function() {
+  $("#followUs").click(function () {
     window.location.href = "https://www.facebook.com/people/PopAcorn/61557374052889/"
   })
   $(".mbarc").on("click", function () {
@@ -154,6 +154,47 @@ window.onload = function () {
     updateCartCount();
 
   })
+  $(".itemHref").click(function() {
+    window.location.href="/store.html?product=" + $(this).attr("product");
+  })
+  const urlParams = new URLSearchParams(window.location.search);
+  const product = urlParams.get('product')
+  if (product != null && Object.keys(PRODUCTS).includes(product) && String(window.location.href
+  ).includes("store.html")) {
+    const ID = product;
+    const data = PRODUCTS[ID];
+    $("#productTitle").html(data.title);
+    $("#productCost").html(data.cost);
+    $("#productDesc").html(data.desc);
+    $("#productImg").attr("src", data.img);
+    currentItem = ID;
+    $("#addons").html("");
+    for (let item of data.addons) {
+      $("#addons").append(`
+        <div class="options" id="option${String(item).replaceAll(" ", "").toLowerCase()}" >
+          <div class="checkbox unchecked">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <p>+ ${item}</p>
+        </div>
+      `)
+    }
+    $(".checkbox").on("click", function () {
+      if ($(this).hasClass("checked")) {
+        $(this).removeClass("checked");
+        $(this).addClass("unchecked");
+      } else {
+        $(this).removeClass("unchecked");
+        $(this).addClass("checked");
+      }
+    })
+    $("#store").css("display", "none");
+    $("#productInfo").css('opacity', 0);
+    $("#productInfo").css("display", "flex");
+    $("#productInfo").animate({
+      opacity: 1,
+    }, 500)
+  }
   $(".product").click(function () {
     const ID = $(this).attr("id");
     const data = PRODUCTS[ID];
