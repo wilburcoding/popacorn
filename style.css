@@ -405,6 +405,7 @@ body {
   margin-right: auto;
   width: 60vw;
   padding: 5px;
+  max-width:700px;
 }
 
 #cartItems {
@@ -412,7 +413,21 @@ body {
   display: flex;
   flex-direction: column;
 }
+#checkout {
+  margin-right:0;
+  margin-left:auto;
+  margin-top:10px;
+  margin-bottom:0;
 
+}
+#price {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+#price p {
+  margin:0;
+}
 .delete {
   height: 50px;
   width: 50px;
@@ -430,7 +445,7 @@ body {
   width: 100%;
   height: auto;
   border-radius:5px;
-  margin-bottom:10px;
+  margin-top:5px;
   max-width:700px;
   border: solid 1px black;
   display: flex;
