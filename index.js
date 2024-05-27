@@ -71,6 +71,9 @@ window.onload = function () {
   $("#orderNow").click(function() {
     window.location.href="/store.html"
   })
+  $("#followUs").click(function() {
+    window.location.href = "https://www.facebook.com/people/PopAcorn/61557374052889/"
+  })
   $(".mbarc").on("click", function () {
     if (!mobile) {
       $("#menu").css("opacity", 0);
