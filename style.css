@@ -383,12 +383,24 @@ body {
 
 }
 
+#checkoutmain {
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60vw;
+  padding: 5px;
+  max-width: 700px;
+}
+
+
 #cmain {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom:10vh;
+  margin-bottom: 10vh;
 }
 
 #empty {
@@ -406,7 +418,7 @@ body {
   margin-right: auto;
   width: 60vw;
   padding: 5px;
-  max-width:700px;
+  max-width: 700px;
 }
 
 #cartItems {
@@ -414,22 +426,26 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 #checkout {
-  margin-right:0;
-  margin-left:auto;
-  margin-top:10px;
-  margin-bottom:0;
+  margin-right: 0;
+  margin-left: auto;
+  margin-top: 10px;
+  margin-bottom: 0;
 
 }
+
 .price {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
+
 .price p {
-  margin:0;
+  margin: 0;
 }
+
 .delete {
   height: 50px;
   width: 50px;
@@ -439,16 +455,17 @@ body {
   justify-content: center;
   transition-duration: 0.3s;
 }
+
 .delete:hover {
-  color:rgb(255, 93, 93);
+  color: rgb(255, 93, 93);
 }
 
 .cartItem {
   width: 100%;
   height: auto;
-  border-radius:5px;
-  margin-top:5px;
-  max-width:700px;
+  border-radius: 5px;
+  margin-top: 5px;
+  max-width: 700px;
   border: solid 1px black;
   display: flex;
   flex-direction: row;
@@ -461,30 +478,33 @@ body {
   margin: 0;
   flex-direction: column;
 }
+
 .primaryCost {
-  font-weight:600;
+  font-weight: 600;
 }
+
 .finalCost {
   font-weight: 800;
-  font-size:20px;
+  font-size: 20px;
 }
 
 .costInfo {
   display: flex;
   margin: 0;
-  width:auto;
+  width: auto;
   text-align: end;
-  margin-right:5px;
-  margin-left:auto;
+  margin-right: 5px;
+  margin-left: auto;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
 
 }
-.costInfo p{
-  margin:0;
-  margin-right:0;
-  margin-left:auto;
+
+.costInfo p {
+  margin: 0;
+  margin-right: 0;
+  margin-left: auto;
 }
 
 .itemInfo h3,
@@ -504,9 +524,11 @@ body {
 #cart h1 {
   margin: 5px;
 }
+
 .itemInfo h3 {
   text-transform: capitalize;
 }
+
 .mas {
   margin: 0;
   position: relative;
