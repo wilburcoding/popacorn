@@ -87,7 +87,6 @@
 
   <script src="index.js"></script>
   <script type="module">
-    // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
     import { getFirestore, deleteDoc, doc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -101,7 +100,7 @@
       measurementId: "G-WHDEL9KXW3"
     };
     var token = function () {
-      return Math.random().toString(36).substr(2); // remove `0.`
+      return Math.random().toString(36).substr(2);
     };
     function toTitleCase(str) {
       return str.replace(

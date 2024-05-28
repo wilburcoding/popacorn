@@ -48,7 +48,7 @@ var token = function () {
 
 window.onload = function () {
   let mobile = false;
-
+  console.log("ea")
   function updateCartCount() {
     if (localStorage.getItem("cart") !== null) {
       const dat = JSON.parse(localStorage.getItem("cart"));
