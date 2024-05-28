@@ -82,7 +82,7 @@
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-    import { getFirestore, doc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, deleteDoc, doc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
     const firebaseConfig = {
       apiKey: "AIzaSyBLZQeeK9JAESw3gN7l0hksGbyUMlbm3ZQ",
       authDomain: "popacorn-8af6b.firebaseapp.com",
@@ -180,12 +180,9 @@
             <p style="margin:0;margin-bottom:5px;font-weight:800">Total Cost (With delivery fee): ৳${data.total}</p>
           `)
       });
-      $("#deleteOrder").click(function () {
-        db.collection("orders").doc($("#deleteId").val()).delete().then(() => {
-          window.location.reload()
-        }).catch((error) => {
-          alert("Error deleting program, the ID may be incorrect");
-        });
+      $("#deleteOrder").click(async function () {
+        deleteDoc(doc(db, "orders", $("#deleteId").val()));
+        window.location.reload();
       })
     }
 
