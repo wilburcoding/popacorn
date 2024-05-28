@@ -406,10 +406,20 @@ body {
   max-width: 700px;
 }
 #admin {
-  width:60vw;
+  width:80vw;
   min-height:100vh;
   display:flex;
   flex-direction: column;
+}
+#btable td, #btable th, #btable tr{
+  border: solid 1px black;
+
+}
+#btable {
+  border: solid 1px black;
+}
+#btable tr td {
+  font-size:15px;
 }
 #contentadmin {
   width:100vw;
