@@ -118,8 +118,10 @@
         style="border-radius: 0px;margin-bottom: 0px;border-bottom-width: 0px;" />
       <input type="text" id="czip" placeholder="Postal Code"
         style="border-radius: 0px 0px 5px 5px;margin-bottom: 0px;" />
-      <button class="primaryBtn" id="submitForm" style="width:200px;padding:5px 5px;font-size:15px;margin:5px;">Complete Order</button>
-      <p style="margin:0; color:red;display: none;font-size: 15px;" id="required">Please complete all required fields.</p>
+      <button class="primaryBtn" id="submitForm" style="width:200px;padding:5px 5px;font-size:15px;margin:5px;">Complete
+        Order</button>
+      <p style="margin:0; color:red;display: none;font-size: 15px;" id="required">Please complete all required fields.
+      </p>
     </div>
     <div class="main-content"
       style="height:10vh;width:100%;margin:0;background-color: #013a46;display:flex;justify-content: center;align-items: center;">
@@ -135,12 +137,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
     import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
       apiKey: "AIzaSyBLZQeeK9JAESw3gN7l0hksGbyUMlbm3ZQ",
       authDomain: "popacorn-8af6b.firebaseapp.com",
@@ -150,13 +146,14 @@
       appId: "1:61775911379:web:464bacfa574458965b3726",
       measurementId: "G-WHDEL9KXW3"
     };
-
-    // Initialize Firebase
+    var token = function () {
+      return Math.random().toString(36).substr(2); // remove `0.`
+    };
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
-    const REQUIRED = ["cfirst", "clast", "cemail", "cphone", "caddress1","ccity", "ccountry", "czip"];
-    $("#submitForm").click(function() {
+    const REQUIRED = ["cfirst", "clast", "cemail", "cphone", "caddress1", "ccity", "ccountry", "czip"];
+    $("#submitForm").click(function () {
       for (var item of REQUIRED) {
         if ($("#" + item).val() == "") {
           $("#required").css("display", "flex");
@@ -164,6 +161,16 @@
         }
 
       }
+      let finalTotal = String($("#finaltotal").html()).substring(1);
+      db.collection("orders").doc(token()).set({
+        address:$("#caddress1").val() + ", " + $("#caddress2").val() + ", " + $("#ccity").val() + ", " + $("#ccountry").val() + " " + $("#czip").val(),
+        cartraw: localStorage.getItem("cart"),
+        email:$("#cemail").val(),
+        name:$("#cfirst").val() + " " + $("#clast").val(),
+        phonenumber:$("#phone").val(),
+        total:parseFloat(finalTotal),
+        timecreated: Date.now()
+      })
 
     })
 
