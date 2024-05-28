@@ -144,6 +144,19 @@
     }
     window.onload = async function () {
       const querySnapshot = await getDocs(collection(db, "orders"));
+        function updateCartCount() {
+        if (localStorage.getItem("cart") !== null) {
+          const dat = JSON.parse(localStorage.getItem("cart"));
+          console.log(dat);
+          $("#cartCountP").html(dat.length);
+          $("#cartCount").css('display', 'flex');
+
+        } else {
+          $("#cartCount").css('display', 'none');
+
+        }
+      }
+      updateCartCount();
       querySnapshot.forEach((doc) => {
         const id = doc.id;
         const data = doc.data();
