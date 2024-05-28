@@ -38,27 +38,18 @@ const PRODUCTS = {
   }
 }
 let currentItem = null;
-var rand = function () {
-  return Math.random().toString(36).substr(2);
-};
-
 var token = function () {
-  return rand() + rand();
+  return Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2);
 };
-
 window.onload = function () {
   let mobile = false;
-  console.log("ea")
   function updateCartCount() {
     if (localStorage.getItem("cart") !== null) {
       const dat = JSON.parse(localStorage.getItem("cart"));
-      console.log(dat);
       $("#cartCountP").html(dat.length);
       $("#cartCount").css('display', 'flex');
-
     } else {
       $("#cartCount").css('display', 'none');
-
     }
   }
   updateCartCount();
@@ -131,14 +122,11 @@ window.onload = function () {
   $("#mlStore").click(() => window.location.href = "./store.html");
   $("#mlDelivery").click(() => window.location.href = "./index.html#dlvryinfo");
   $("#mlContact").click(() => window.location.href = "./index.html#contact");
-
   $("#addToCart").click(function () {
     let cart = [];
     if (localStorage.getItem("cart") !== null) {
       cart = JSON.parse(localStorage.getItem("cart"));
-    } else {
-
-    }
+    } 
     let addOns = {};
     $('.options').each(function (i, obj) {
       addOns[$(this).attr("id")] = {
@@ -146,7 +134,6 @@ window.onload = function () {
         "name": String($("#" + $(this).attr("id") + " p").html()).substring(2)
       }
     });
-    console.log(addOns);
     cart.push({
       "id": currentItem,
       "addons": addOns,
