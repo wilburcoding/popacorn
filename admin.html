@@ -141,6 +141,19 @@
       }
     }
     const onload = async function () {
+      function updateCartCount() {
+        if (localStorage.getItem("cart") !== null) {
+          const dat = JSON.parse(localStorage.getItem("cart"));
+          console.log(dat);
+          $("#cartCountP").html(dat.length);
+          $("#cartCount").css('display', 'flex');
+
+        } else {
+          $("#cartCount").css('display', 'none');
+
+        }
+      }
+      updateCartCount();
       const querySnapshot = await getDocs(collection(db, "orders"));
       querySnapshot.forEach((doc) => {
         const id = doc.id;
