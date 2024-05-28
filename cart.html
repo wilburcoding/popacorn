@@ -177,8 +177,13 @@
         total: parseFloat(finalTotal),
         timecreated: Date.now()
       });
+      $("#checkoutmain").animate({
+        opacity:0
+      }, 500, function() {
+        $("#checkoutmain").css('display', 'none');
+      })
+
       $("#completemain").css("display", "flex");
-      $("#checkoutmain").css("display", "none");
       localStorage.setItem("cart", JSON.stringify([]));
       if (localStorage.getItem("cart") !== null) {
         const dat = JSON.parse(localStorage.getItem("cart"));
@@ -356,9 +361,6 @@
       }
       $("#subtp").html("৳" + formatter.format(finalcost));
       console.log($("#cartCountP").html())
-      console.log(countlg)
-      console.log(countsm)
-
       if (finalcost > 1099) {
         $("#subtd").html("৳0.00");
       } else {
@@ -375,7 +377,11 @@
     $("#checkoutmain").css('display', 'none');
 
     $("#goCheckout").click(function () {
-      $("#cart").css('display', 'none');
+      $("#cart").animate({
+        opacity:0,
+      }, 500, function() {
+        $("#cart").css("display","none")
+      })
       $("#checkoutmain").css('display', 'flex');
     })
 
