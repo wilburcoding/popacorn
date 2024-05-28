@@ -394,7 +394,12 @@ body {
   min-height: 100vh;
   max-width: 700px;
 }
-
+#checkoutmain h3 {
+  
+}
+#checkoutmain h1 {
+  margin: 5px;
+}
 
 #cmain {
   width: 100%;
