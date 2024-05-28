@@ -55,6 +55,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Address</th>
             <th>Phone Number</th>
             <th>Time Created</th>
             <th>Cart</th>
@@ -87,17 +88,44 @@
       return Math.random().toString(36).substr(2); // remove `0.`
     };
     function toTitleCase(str) {
-        return str.replace(
-          /\w\S*/g,
-          function (txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-          }
-        );
-      }
-      //https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
+      return str.replace(
+        /\w\S*/g,
+        function (txt) {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+      );
+    }
+    //https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
+    const PRODUCTS = {
+      "garliccheese": {
+        "img": "./assets/garliccheese.jpg",
+        "title": "Garlic Cheese",
+        "cost": 90.00,
+      },
+      "cheesecaramel": {
+        "img": "./assets/cheesecaramel.jpg",
+        "title": "Cheese Caramel",
+        "cost": 100.00,
+      },
+      "caramelchocolate": {
+        "img": "./assets/chocolatecaramel.jpg",
+        "cost": 100.00,
+        "title": "Chocolate Caramel",
+      },
+      "classiccaramel": {
+        "img": "./assets/classiccaramel.jpg",
+        "cost": 90.00,
+        "title": "Classic Salted Caramel",
+      },
+      "cookiesandcream": {
+        "img": "./assets/cookiesandcream.jpg",
+        "cost": 100.00,
+        "title": "Cookies and Cream",
+      }
+    }
     window.onload = async function () {
       const querySnapshot = await getDocs(collection(db, "orders"));
       querySnapshot.forEach((doc) => {
@@ -109,6 +137,7 @@
           <td>${id}</td>
           <td>${data.name}</td>
           <td>${data.email}</td>
+          <td>${data.address}</td>
           <td>${data.phonenumber}</td>
           <td>${new Date(data.timecreated)}</td>
           <td id="cart${id}"></td>
@@ -116,11 +145,32 @@
         `)
         for (let item of cart) {
           console.log(item);
-          let cText = 
+          let cost = PRODUCTS[item.id].cost;
+          if (item.portion == "small") {
+            cost -= 37;
+          }
+          let cText = '<span style="font-weight:600">' + toTitleCase(item.portion) + " " + PRODUCTS[item.id].title + "</span><span style='font-size:15px;'> with "
+          let addcount = 0;
+          for (let addon of Object.values(item.addons)) {
+            if (addon.val == false) {
+              continue
+            }
+            if (addcount != 0) {
+              cText += ", ";
+            }
+            cText += addon.name;
+            cost += 20;
+            addcount++;
+          }
+          cText += "</span><span style='font-weight:800'> (৳" + cost + ")</span>"
           $("#cart" + id).append(`
-
+            <p style="margin:0;margin-bottom:5px;">${cText}</p>
+            <hr>
           `)
         }
+        $("#cart" + id).append(`
+            <p style="margin:0;margin-bottom:5px;font-weight:800">Total Cost (With delivery fee): ৳${data.total}</p>
+          `)
       });
     }
 
