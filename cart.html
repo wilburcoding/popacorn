@@ -275,13 +275,17 @@
       }
       $("#subtp").html("৳" + formatter.format(finalcost));
       console.log($("#cartCountP").html())
-      if (finalcost > 5) {
+      console.log(countlg)
+      console.log(countsm)
+
+      if (finalcost > 899) {
         $("#subtd").html("৳0.00");
       } else {
         let weight = (0.2 * countlg) + (0.05 * countsm);
-        $("#subtd").html("৳" + formatter.format(weight));
-
+        console.log(weight);
         finalcost += costFromWeight(weight);
+        $("#subtd").html("৳" + formatter.format(costFromWeight(weight)));
+
       }
       $("#finaltotal").html("৳" + formatter.format(finalcost));
 
