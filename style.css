@@ -416,6 +416,9 @@ body {
 #checkoutmain h1 {
   margin: 5px;
 }
+#completemain h1 {
+  margin: 5px;
+}
 
 #checkoutmain input[type='text'] {
   margin-left: 5px;
