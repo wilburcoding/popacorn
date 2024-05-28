@@ -130,13 +130,19 @@
             style="color:white !important;text-decoration: none;font-weight: 700;">Revvifi
             NY</a></span></p>
     </div>
+    <div id="completemain">
+      <h1>Order Complete</h1>
+      <hr style="color:black;width:100%">
+      <p style="margin-left:5px;">Your order has been successfully placed!</p>
+
+    </div>
   </main>
   <script src="index.js"></script>
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
     const firebaseConfig = {
       apiKey: "AIzaSyBLZQeeK9JAESw3gN7l0hksGbyUMlbm3ZQ",
       authDomain: "popacorn-8af6b.firebaseapp.com",
@@ -153,24 +159,28 @@
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
     const REQUIRED = ["cfirst", "clast", "cemail", "cphone", "caddress1", "ccity", "ccountry", "czip"];
-    $("#submitForm").click(function () {
+    $("#submitForm").click(async function () {
       for (var item of REQUIRED) {
         if ($("#" + item).val() == "") {
           $("#required").css("display", "flex");
-          return
+          // return
         }
 
       }
-      let finalTotal = String($("#finaltotal").html()).substring(1);
-      db.collection("orders").doc(token()).set({
-        address:$("#caddress1").val() + ", " + $("#caddress2").val() + ", " + $("#ccity").val() + ", " + $("#ccountry").val() + " " + $("#czip").val(),
+      let finalTotal = await String($("#finaltotal").html()).substring(1);
+      await setDoc(doc(db, "orders", await token()), {
+        address: $("#caddress1").val() + ", " + $("#caddress2").val() + ", " + $("#ccity").val() + ", " + $("#ccountry").val() + " " + $("#czip").val(),
         cartraw: localStorage.getItem("cart"),
-        email:$("#cemail").val(),
-        name:$("#cfirst").val() + " " + $("#clast").val(),
-        phonenumber:$("#phone").val(),
-        total:parseFloat(finalTotal),
+        email: $("#cemail").val(),
+        name: $("#cfirst").val() + " " + $("#clast").val(),
+        phonenumber: $("#cphone").val(),
+        total: parseFloat(finalTotal),
         timecreated: Date.now()
-      })
+      });
+      $("#completemain").css("display", "flex");
+      $("#checkoutmain").css("display","none");
+
+
 
     })
 
