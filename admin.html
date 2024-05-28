@@ -50,6 +50,7 @@
     <div id="contentadmin">
       <div id="admin">
         <h1>Admin Console</h1>
+        <h2>Orders View</h2>
         <table id="btable" style="width:100%;">
           <tr>
             <th>ID</th>
@@ -64,7 +65,14 @@
 
 
 
+
         </table>
+        <h2>Delete Order by ID</h2>
+        <div style="width:300px">
+          <input id="deleteId" type="text" placeholder="Order ID">
+          <button id="deleteOrder">Delete</button>
+        </div>
+
       </div>
     </div>
 
@@ -172,6 +180,13 @@
             <p style="margin:0;margin-bottom:5px;font-weight:800">Total Cost (With delivery fee): ৳${data.total}</p>
           `)
       });
+      $("#deleteOrder").click(function () {
+        db.collection("orders").doc($("#deleteId").val()).delete().then(() => {
+          window.location.reload()
+        }).catch((error) => {
+          alert("Error deleting program, the ID may be incorrect");
+        });
+      })
     }
 
 
