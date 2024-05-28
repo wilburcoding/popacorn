@@ -98,7 +98,8 @@
     <div class="main-content"
       style="height:10vh;width:100%;margin:0;background-color: #013a46;display:flex;justify-content: center;align-items: center;">
       <p style="color:white;font-weight: 300;">Popacorn 2024 - <span style="font-weight: 500;">Designed by <a
-            href="https://revvifi.org" target="_blank" style="color:white !important;text-decoration: none;font-weight: 700;">Revvifi
+            href="https://revvifi.org" target="_blank"
+            style="color:white !important;text-decoration: none;font-weight: 700;">Revvifi
             NY</a></span></p>
     </div>
   </main>
@@ -216,7 +217,7 @@
           }
           $("#subtp").html("৳" + formatter.format(finalcost));
 
-          if (cart.length > MAX_DELIVERY) {
+          if (finalcost > 899) {
 
             $("#subtd").html("৳0.00");
           } else {
@@ -247,7 +248,7 @@
       }
       $("#subtp").html("৳" + formatter.format(finalcost));
       console.log($("#cartCountP").html())
-      if (cart.length > 5) {
+      if (finalcost > 5) {
         $("#subtd").html("৳0.00");
       } else {
         $("#subtd").html("৳5.00");
