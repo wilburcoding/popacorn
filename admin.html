@@ -181,8 +181,10 @@
           `)
       });
       $("#deleteOrder").click(async function () {
-        deleteDoc(doc(db, "orders", $("#deleteId").val()));
-        window.location.reload();
+        deleteDoc(doc(db, "orders", $("#deleteId").val())).then(function () {
+          window.location.reload();
+
+        })
       })
     }
 
