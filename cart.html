@@ -92,9 +92,27 @@
     <div id="checkoutmain">
       <h1>Checkout</h1>
       <hr style="color:black;width:100%">
-      <h3>Email</h3>
-      <input type="text" id="cemail"/>
+      <div style="display: flex;flex-direction: row;">
+        <div>
+        <h3>First Name</h3>
+        <input type="text" id="cfirst" placeholder="First Name" />
+        </div>
+        <div>
+          <h3>Last Name</h3>
+          <input type="text" id="clast" placeholder="Last Name" />
+        </div>
+      </div>
 
+      <h3>Email</h3>
+      <input type="text" id="cemail" placeholder="Email Address" />
+      <h3>Phone Number</h3>
+      <input type="text" id="cphone" placeholder="Phone Number" />
+      <h3>Shipping Address</h3>
+      <input type="text" id="caddress1" placeholder="Address Line 1" style="margin-bottom:0px;border-radius: 5px 5px 0px 0px;border-bottom-width: 0px;"/>
+      <input type="text" id="caddress2" placeholder="Address Line 2 (optional)" style="border-radius: 0px;margin-bottom: 0px;border-bottom-width: 0px;"/>
+      <input type="text" id="ccity" placeholder="City" style="border-radius: 0px;margin-bottom: 0px;border-bottom-width: 0px;" />
+      <input type="text" id="ccountry" placeholder="Country" style="border-radius: 0px;margin-bottom: 0px;border-bottom-width: 0px;" />
+      <input type="text" id="czip" placeholder="Postal Code" style="border-radius: 0px 0px 5px 5px;margin-bottom: 0px;" />
 
     </div>
     <div class="main-content"
@@ -116,7 +134,7 @@
     function costFromWeight(weight) {
       if (weight <= 1) {
         return 50
-      } 
+      }
       return 70;
 
     }
@@ -168,9 +186,9 @@
         let primaryCost = productData.cost;
         if (item.portion == "small") {
           primaryCost -= 37;
-          countsm+=1;
+          countsm += 1;
         } else {
-          countlg+=1;
+          countlg += 1;
         }
         const addons = item.addons;
         let addonscount = 0;
