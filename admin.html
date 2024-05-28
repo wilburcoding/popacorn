@@ -85,7 +85,6 @@
 
   </main>
 
-  <script src="index.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
@@ -141,21 +140,8 @@
         "title": "Cookies and Cream",
       }
     }
-    window.onload = async function () {
+    const onload = async function () {
       const querySnapshot = await getDocs(collection(db, "orders"));
-        function updateCartCount() {
-        if (localStorage.getItem("cart") !== null) {
-          const dat = JSON.parse(localStorage.getItem("cart"));
-          console.log(dat);
-          $("#cartCountP").html(dat.length);
-          $("#cartCount").css('display', 'flex');
-
-        } else {
-          $("#cartCount").css('display', 'none');
-
-        }
-      }
-      updateCartCount();
       querySnapshot.forEach((doc) => {
         const id = doc.id;
         const data = doc.data();
@@ -172,7 +158,6 @@
         </tr>
         `)
         for (let item of cart) {
-          console.log(item);
           let cost = PRODUCTS[item.id].cost;
           if (item.portion == "small") {
             cost -= 37;
@@ -207,7 +192,59 @@
         })
       })
     }
+    window.onload = onload;
+    let mobile = false;
+    $("#mlStore").click(() => window.location.href = "./store.html");
+    $("#mlDelivery").click(() => window.location.href = "./index.html#dlvryinfo");
+    $("#mlContact").click(() => window.location.href = "./index.html#contact");
+    $("#mainNav").click(function () {
+      window.location.href = "/";
+    })
+    $(".mas").click(function () {
+      window.location.href = "/cart.html"
+    })
+    $(".mbarc").on("click", function () {
+      if (!mobile) {
+        $("#menu").css("opacity", 0);
+        $("#menu").css("display", "flex");
+        $(".menulink").animate({
+          height: "70px"
+        }, 300)
+        $("#menu").animate({
+          opacity: 1
+        }, 100)
+        $("#mbar").animate({
+          opacity: 0
+        }, 100, function () {
+          $(".mab").css("display", "none");
+          $("#x").attr("style", "display:block");
+          $("#mbar").animate({
+            opacity: 1
+          }, 100)
+        })
+        mobile = true;
+      } else {
+        $("#menu").animate({
+          opacity: 0
+        }, 100, function () {
+          $("#menu").css("display", "none");
+          $(".menulink").animate({
+            height: "50px"
+          }, 5)
 
+        })
+        $("#mbar").animate({
+          opacity: 0
+        }, 100, function () {
+          $("#x").attr("style", "display:none")
+          $(".mab").css("display", "block")
+          $("#mbar").animate({
+            opacity: 1
+          }, 100)
+        })
+        mobile = false;
+      }
+    })
 
   </script>
 
