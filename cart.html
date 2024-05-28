@@ -123,79 +123,84 @@
         return 110
       } else if (weight <= 5) {
         return 140
+      }
+      return 140
+    }
+
+    if (localStorage.getItem("cart") != null) {
+
+      const PRODUCTS = {
+        "garliccheese": {
+          "img": "./assets/garliccheese.jpg",
+          "title": "Garlic Cheese",
+          "cost": 90.00,
+        },
+        "cheesecaramel": {
+          "img": "./assets/cheesecaramel.jpg",
+          "title": "Cheese Caramel",
+          "cost": 100.00,
+        },
+        "caramelchocolate": {
+          "img": "./assets/chocolatecaramel.jpg",
+          "cost": 100.00,
+          "title": "Chocolate Caramel",
+        },
+        "classiccaramel": {
+          "img": "./assets/classiccaramel.jpg",
+          "cost": 90.00,
+          "title": "Classic Salted Caramel",
+        },
+        "cookiesandcream": {
+          "img": "./assets/cookiesandcream.jpg",
+          "cost": 100.00,
+          "title": "Cookies and Cream",
+        }
+      }
+      let cart = JSON.parse(localStorage.getItem('cart'));
+      let finalcost = 0;
+      let countsm = 0;
+      let countlg = 0;
+      if (cart.length == 0) {
+        $("#checkout").css("display", "none");
       } else {
-        return 140
+        $("#empty").css("display", "none");
+        $("#storeL").css('display', "none");
       }
 
-      if (localStorage.getItem("cart") != null) {
+      for (let item of cart) {
 
-        const PRODUCTS = {
-          "garliccheese": {
-            "img": "./assets/garliccheese.jpg",
-            "title": "Garlic Cheese",
-            "cost": 90.00,
-          },
-          "cheesecaramel": {
-            "img": "./assets/cheesecaramel.jpg",
-            "title": "Cheese Caramel",
-            "cost": 100.00,
-          },
-          "caramelchocolate": {
-            "img": "./assets/chocolatecaramel.jpg",
-            "cost": 100.00,
-            "title": "Chocolate Caramel",
-          },
-          "classiccaramel": {
-            "img": "./assets/classiccaramel.jpg",
-            "cost": 90.00,
-            "title": "Classic Salted Caramel",
-          },
-          "cookiesandcream": {
-            "img": "./assets/cookiesandcream.jpg",
-            "cost": 100.00,
-            "title": "Cookies and Cream",
-          }
-        }
-        let cart = JSON.parse(localStorage.getItem('cart'));
-        let finalcost = 0;
-        if (cart.length == 0) {
-          $("#checkout").css("display", "none");
+        const productData = PRODUCTS[item.id];
+        console.log(productData.img);
+        let primaryCost = productData.cost;
+        if (item.portion == "small") {
+          primaryCost -= 37;
+          countsm+=1;
         } else {
-          $("#empty").css("display", "none");
-          $("#storeL").css('display', "none");
+          countlg+=1;
         }
-
-        for (let item of cart) {
-
-          const productData = PRODUCTS[item.id];
-          console.log(productData.img);
-          let primaryCost = productData.cost;
-          if (item.portion == "small") {
-            primaryCost -= 37;
+        const addons = item.addons;
+        let addonscount = 0;
+        let addonstext = "Addons: ";
+        for (let addondat of Object.keys(addons)) {
+          const addon = addons[addondat];
+          if (addon.val == false) {
+            continue;
           }
-          const addons = item.addons;
-          let addonscount = 0;
-          let addonstext = "Addons: ";
-          for (let addondat of Object.keys(addons)) {
-            const addon = addons[addondat];
-            if (addon.val == false) {
-              continue;
-            }
-            if (addonscount != 0) {
-              addonstext += ", ";
-            }
-            addonstext += addon.name;
-            addonscount += 1;
+          if (addonscount != 0) {
+            addonstext += ", ";
           }
-          let secondaryCosts = addonscount * 20.00;
-          const final = primaryCost + secondaryCosts;
-          if (addonscount == 0) {
-            addonstext = "No Addons";
-          }
-          const uid = item.uid;
-          finalcost += final;
+          addonstext += addon.name;
+          addonscount += 1;
+        }
+        let secondaryCosts = addonscount * 20.00;
+        const final = primaryCost + secondaryCosts;
+        if (addonscount == 0) {
+          addonstext = "No Addons";
+        }
+        const uid = item.uid;
+        finalcost += final;
 
-          $("#cartItems").append(`
+        $("#cartItems").append(`
           <div class="cartItem" id="c${uid}">
             <div class="delete" id="${uid}">
               <i class="fa-solid fa-xmark"></i>
@@ -213,79 +218,81 @@
             </div>
           </div>
           `
-          )
-          $("#" + uid).click(function () {
-            $("#c" + uid).css("display", "none");
-            const result = (cart.filter((cartite) => String(cartite.uid) != String(uid)));
-            localStorage.setItem("cart", JSON.stringify(result));
-            cart = result;
-            finalcost = 0;
-            let numsl = 0;
-            let numlg = 0;
-            for (let item of cart) {
-              finalcost += PRODUCTS[item.id].cost;
-              for (let addon of Object.values(item.addons)) {
-                if (addon.val) {
-                  finalcost += 20;
-                }
-              }
-              if (item.portion == "small") {
-                numsl += 1;
-              } else {
-                numlg += 1;
+        )
+        $("#" + uid).click(function () {
+          $("#c" + uid).css("display", "none");
+          const result = (cart.filter((cartite) => String(cartite.uid) != String(uid)));
+          localStorage.setItem("cart", JSON.stringify(result));
+          cart = result;
+          finalcost = 0;
+          let numsl = 0;
+          let numlg = 0;
+          for (let item of cart) {
+            finalcost += PRODUCTS[item.id].cost;
+            for (let addon of Object.values(item.addons)) {
+              if (addon.val) {
+                finalcost += 20;
               }
             }
-            $("#subtp").html("৳" + formatter.format(finalcost));
-
-            if (finalcost > 899) {
-
-              $("#subtd").html("৳0.00");
+            if (item.portion == "small") {
+              numsl += 1;
             } else {
-              $("#subtd").html("৳5.00");
-              let weight = (0.2 * numlg) + (0.05 * numsl);
-
-              finalcost += ;
-
+              numlg += 1;
             }
+          }
+          $("#subtp").html("৳" + formatter.format(finalcost));
 
-            if (cart.length == 0) {
-              $("#checkout").css("display", "none");
-              $("#empty").css('display', "block");
-              $("#storeL").css('display', "block");
-            }
+          if (finalcost > 899) {
 
-            $("#finaltotal").html("৳" + formatter.format(finalcost));
+            $("#subtd").html("৳0.00");
+          } else {
+            let weight = (0.2 * numlg) + (0.05 * numsl);
+            $("#subtd").html("৳" + formatter.format(weight));
 
-            if (localStorage.getItem("cart") !== null) {
-              const dat = JSON.parse(localStorage.getItem("cart"));
-              console.log(dat);
-              $("#cartCountP").html(dat.length);
-              $("#cartCount").css('display', 'flex');
+            finalcost += costFromWeight(weight);
 
-            } else {
-              $("#cartCount").css('display', 'none');
+          }
 
-            }
-          })
-        }
-        $("#subtp").html("৳" + formatter.format(finalcost));
-        console.log($("#cartCountP").html())
-        if (finalcost > 5) {
-          $("#subtd").html("৳0.00");
-        } else {
-          $("#subtd").html("৳5.00");
-          finalcost += 5;
-        }
-        $("#finaltotal").html("৳" + formatter.format(finalcost));
+          if (cart.length == 0) {
+            $("#checkout").css("display", "none");
+            $("#empty").css('display', "block");
+            $("#storeL").css('display', "block");
+          }
 
+          $("#finaltotal").html("৳" + formatter.format(finalcost));
 
+          if (localStorage.getItem("cart") !== null) {
+            const dat = JSON.parse(localStorage.getItem("cart"));
+            console.log(dat);
+            $("#cartCountP").html(dat.length);
+            $("#cartCount").css('display', 'flex');
+
+          } else {
+            $("#cartCount").css('display', 'none');
+
+          }
+        })
       }
-      $("#checkoutmain").css('display', 'none');
+      $("#subtp").html("৳" + formatter.format(finalcost));
+      console.log($("#cartCountP").html())
+      if (finalcost > 5) {
+        $("#subtd").html("৳0.00");
+      } else {
+        let weight = (0.2 * countlg) + (0.05 * countsm);
+        $("#subtd").html("৳" + formatter.format(weight));
 
-      $("#goCheckout").click(function () {
-        $("#cart").css('display', 'none');
-        $("#checkoutmain").css('display', 'flex');
-      })
+        finalcost += costFromWeight(weight);
+      }
+      $("#finaltotal").html("৳" + formatter.format(finalcost));
+
+
+    }
+    $("#checkoutmain").css('display', 'none');
+
+    $("#goCheckout").click(function () {
+      $("#cart").css('display', 'none');
+      $("#checkoutmain").css('display', 'flex');
+    })
 
 
 
