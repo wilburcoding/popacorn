@@ -124,7 +124,7 @@
       </div>
     </div>
     <div class="main-content" id="store"
-      style="flex-direction: column;padding:30px;margin-top:0;align-items: center;margin-bottom:20vh;height:auto;">
+      style="flex-direction: column;padding:30px;margin-top:0;align-items: center;margin-bottom:20vh;height:auto;min-height:100vh;">
       <div id="storeContainer"
         style="display:flex;flex-direction: row;width:100%;max-width:1200px;flex-flow: wrap;align-items: center;justify-content: center;margin-bottom:50px;height:auto;">
       
@@ -161,8 +161,7 @@
         style: 'decimal',
         maximumFractionDigits: 2,
         minimumFractionDigits: 2
-
-      });
+    });
     const querySnapshot = await getDocs(collection(db, "products"));
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
