@@ -312,7 +312,7 @@
         const querySnapshot = await getDocs(collection(db, "products"));
             querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
-                const id = doc.id();
+                const id = doc.id;
                 const data = doc.data();
                 $("#featuredProducts").append(`
                 <div class="product itemHref" product="${id}">
