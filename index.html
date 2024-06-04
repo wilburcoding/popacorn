@@ -18,7 +18,7 @@
     <script src="https://kit.fontawesome.com/3f34c302de.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  
+
 </head>
 
 <body>
@@ -51,7 +51,8 @@
             <h4 class="menulink" id="mlStore" style="margin:0;margin-left:100px">Store</h4>
             <h4 class="menulink" id="mlDelivery" style="margin:0;margin-left:100px">Delivery</h4>
             <h4 class="menulink" id="mlContact" style="margin:0;margin-left:100px">Contact Us</h4>
-            <div style="display: flex;flex-direction: row;align-items: flex-start;justify-content:flex-start;width:80vw">
+            <div
+                style="display: flex;flex-direction: row;align-items: flex-start;justify-content:flex-start;width:80vw">
                 <div class="insta"
                     style="height:55px;width:55px;background-color: transparent;border-radius: 50%;display:flex;align-items: center;justify-content: center;margin-right:10px;">
                     <i class="fa-brands fa-instagram" style="color:white;font-size:40px;"></i>
@@ -289,12 +290,13 @@
                         style="color:white !important;text-decoration: none;font-weight: 700;">Revvifi
                         NY</a></span></p>
         </div>
-
     </main>
     <script src="index.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        import { getFirestore, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
         const firebaseConfig = {
             apiKey: "AIzaSyBLZQeeK9JAESw3gN7l0hksGbyUMlbm3ZQ",
             authDomain: "popacorn-8af6b.firebaseapp.com",
@@ -306,6 +308,8 @@
         };
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
     </script>
 </body>
 
