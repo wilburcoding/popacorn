@@ -309,6 +309,12 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
+        const formatter = new Intl.NumberFormat('en-US', {
+                style: 'decimal',
+                maximumFractionDigits: 2,
+                minimumFractionDigits: 2
+
+            });
         const querySnapshot = await getDocs(collection(db, "products"));
             querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
@@ -320,7 +326,7 @@
                         <img src="${data.img}">
                     </div>
                     <h1>${data.title}</h1>
-                    <h4>৳${data.cost}</h4>
+                    <h4>৳${formatter.format((data.cost))}</h4>
                 </div>
                 `)
                 
