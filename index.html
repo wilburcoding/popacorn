@@ -108,41 +108,7 @@
             <h1 style="font-size:50px;margin-top:40px;">FEATURED PRODUCTS</h1>
             <div id="featuredProducts"
                 style="display:flex;flex-direction: row;width:100%;max-width:1200px;flex-flow: wrap;align-items: center;justify-content: center;margin-bottom:50px;">
-                <div class="product itemHref" product="garliccheese">
-                    <div class="pimg">
-                        <img src="./assets/garliccheese.jpg">
-                    </div>
-                    <h1>Garlic Cheese</h1>
-                    <h4>৳90.00</h4>
-                </div>
-                <div class="product itemHref" product="cheesecaramel">
-                    <div class="pimg">
-                        <img src="./assets/cheesecaramel.jpg">
-                    </div>
-                    <h1>Cheese Caramel</h1>
-                    <h4>৳100.00</h4>
-                </div>
-                <div class="product itemHref" product="caramelchocolate">
-                    <div class="pimg">
-                        <img src="./assets/chocolatecaramel.jpg">
-                    </div>
-                    <h1>Chocolate Caramel</h1>
-                    <h4>৳100.00</h4>
-                </div>
-                <div class="product itemHref" product="classiccaramel">
-                    <div class="pimg">
-                        <img src="./assets/classiccaramel.jpg">
-                    </div>
-                    <h1>Classic Salted Caramel</h1>
-                    <h4>৳90.00</h4>
-                </div>
-                <div class="product itemHref" product="cookiesandcream">
-                    <div class="pimg">
-                        <img src="./assets/cookiesandcream.jpg">
-                    </div>
-                    <h1>Cookies and Cream</h1>
-                    <h4>৳100.00</h4>
-                </div>
+                
             </div>
 
         </div>
@@ -329,6 +295,9 @@
                     <h4>৳${formatter.format((data.cost))}</h4>
                 </div>
                 `)
+                $(".itemHref").click(function () {
+                    window.location.href = "/store.html?product=" + $(this).attr("product");
+                })
                 
             });
 
