@@ -125,7 +125,7 @@
     </div>
     <div class="main-content" id="store"
       style="flex-direction: column;padding:30px;margin-top:0;align-items: center;margin-bottom:20vh;">
-      <div
+      <div id="storeContainer"
         style="display:flex;flex-direction: row;width:100%;max-width:1200px;flex-flow: wrap;align-items: center;justify-content: center;margin-bottom:50px;">
         <div class="product" id="garliccheese">
           <div class="pimg">
@@ -191,6 +191,25 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
+    const querySnapshot = await getDocs(collection(db, "products"));
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        const id = doc.id;
+        const data = doc.data();
+        $("#featuredProducts").append(`
+                <div class="product" product="${id}">
+                    <div class="pimg">
+                        <img src="${data.img}">
+                    </div>
+                    <h1>${data.title}</h1>
+                    <h4>৳${formatter.format((data.cost))}</h4>
+                </div>
+                `)
+        $(".itemHref").click(function () {
+          window.location.href = "/store.html?product=" + $(this).attr("product");
+        })
+
+      });
 
   </script>
 
