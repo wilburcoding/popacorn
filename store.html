@@ -124,9 +124,9 @@
       </div>
     </div>
     <div class="main-content" id="store"
-      style="flex-direction: column;padding:30px;margin-top:0;align-items: center;margin-bottom:20vh;">
+      style="flex-direction: column;padding:30px;margin-top:0;align-items: center;margin-bottom:20vh;height:auto;">
       <div id="storeContainer"
-        style="display:flex;flex-direction: row;width:100%;max-width:1200px;flex-flow: wrap;align-items: center;justify-content: center;margin-bottom:50px;">
+        style="display:flex;flex-direction: row;width:100%;max-width:1200px;flex-flow: wrap;align-items: center;justify-content: center;margin-bottom:50px;height:auto;">
         <div class="product" id="garliccheese">
           <div class="pimg">
             <img src="./assets/garliccheese.jpg">
@@ -177,7 +177,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-    import { getFirestore, doc, setDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBLZQeeK9JAESw3gN7l0hksGbyUMlbm3ZQ",
@@ -191,12 +191,18 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'decimal',
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2
+
+      });
     const querySnapshot = await getDocs(collection(db, "products"));
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         const id = doc.id;
         const data = doc.data();
-        $("#featuredProducts").append(`
+        $("#storeContainer").append(`
                 <div class="product" product="${id}">
                     <div class="pimg">
                         <img src="${data.img}">
