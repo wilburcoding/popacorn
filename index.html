@@ -106,7 +106,7 @@
         <div class="main-content" id="featured"
             style="display:flex;flex-direction: column;padding:30px;margin-top:0;align-items: center;">
             <h1 style="font-size:50px;margin-top:40px;">FEATURED PRODUCTS</h1>
-            <div
+            <div id="featuredProducts"
                 style="display:flex;flex-direction: row;width:100%;max-width:1200px;flex-flow: wrap;align-items: center;justify-content: center;margin-bottom:50px;">
                 <div class="product itemHref" product="garliccheese">
                     <div class="pimg">
@@ -295,7 +295,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-        import { getFirestore, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getFirestore, doc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBLZQeeK9JAESw3gN7l0hksGbyUMlbm3ZQ",
@@ -309,6 +309,22 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
+        const querySnapshot = await getDocs(collection(db, "products"));
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                const id = doc.id();
+                const data = doc.data();
+                $("#featuredProducts").append(`
+                <div class="product itemHref" product="${id}">
+                    <div class="pimg">
+                        <img src="${data.img}">
+                    </div>
+                    <h1>${data.title}</h1>
+                    <h4>৳${data.cost}</h4>
+                </div>
+                `)
+                
+            });
 
     </script>
 </body>
