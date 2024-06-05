@@ -176,6 +176,8 @@
                     <h4>৳${formatter.format((data.cost))}</h4>
                 </div>
                 `)
+        $(".product").click(handleProductClick);
+
         $(".itemHref").click(function () {
           window.location.href = "/store.html?product=" + $(this).attr("product");
         })
