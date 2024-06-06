@@ -299,7 +299,11 @@
           `
           )
           $("#" + uid).click(function () {
-            $("#c" + uid).css("display", "none");
+            $("#c" + uid).animate({
+              opacity:0
+            }, 500, function() {
+              $(this).css("display", "none");
+            })
             const result = (cart.filter((cartite) => String(cartite.uid) != String(uid)));
             localStorage.setItem("cart", JSON.stringify(result));
             cart = result;
