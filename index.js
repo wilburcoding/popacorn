@@ -41,18 +41,23 @@ let currentItem = null;
 var token = function () {
   return Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2);
 };
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'decimal',
+  maximumFractionDigits: 2,
+  minimumFractionDigits: 2
+});
 function handleProductClick() {
-    const ID = $(this).attr("id");
-    const data = PRODUCTS[ID];
-    console.log(PRODUCTS)
-    $("#productTitle").html(data.title);
-    $("#productCost").html(data.cost);
-    $("#productDesc").html(data.desc);
-    $("#productImg").attr("src", data.img);
-    currentItem = ID;
-    $("#addons").html("");
-    for (let item of data.addons) {
-      $("#addons").append(`
+  const ID = $(this).attr("id");
+  const data = PRODUCTS[ID];
+  console.log(PRODUCTS)
+  $("#productTitle").html(data.title);
+  $("#productCost").html("৳" + formatter.format(data.cost));
+  $("#productDesc").html(data.desc);
+  $("#productImg").attr("src", data.img);
+  currentItem = ID;
+  $("#addons").html("");
+  for (let item of data.addons) {
+    $("#addons").append(`
         <div class="options" id="option${String(item).replaceAll(" ", "").toLowerCase()}" >
           <div class="checkbox unchecked">
             <i class="fa-solid fa-check"></i>
@@ -60,23 +65,23 @@ function handleProductClick() {
           <p>+ ${item}</p>
         </div>
       `)
+  }
+  $(".checkbox").on("click", function () {
+    if ($(this).hasClass("checked")) {
+      $(this).removeClass("checked");
+      $(this).addClass("unchecked");
+    } else {
+      $(this).removeClass("unchecked");
+      $(this).addClass("checked");
     }
-    $(".checkbox").on("click", function () {
-      if ($(this).hasClass("checked")) {
-        $(this).removeClass("checked");
-        $(this).addClass("unchecked");
-      } else {
-        $(this).removeClass("unchecked");
-        $(this).addClass("checked");
-      }
-    })
-    $("#store").css("display", "none");
-    $("#productInfo").css('opacity', 0);
-    $("#productInfo").css("display", "flex");
-    $("#productInfo").animate({
-      opacity: 1,
-    }, 500)
-  
+  })
+  $("#store").css("display", "none");
+  $("#productInfo").css('opacity', 0);
+  $("#productInfo").css("display", "flex");
+  $("#productInfo").animate({
+    opacity: 1,
+  }, 500)
+
 }
 
 function mainHandler() {
@@ -104,7 +109,7 @@ function mainHandler() {
   })
   $("#storeL").click(function () {
     window.location.href = "/store.html"
-  }) 
+  })
   $("#followUs").click(function () {
     window.location.href = "https://www.facebook.com/people/PopAcorn/61557374052889/"
   })
@@ -166,7 +171,7 @@ function mainHandler() {
     let cart = [];
     if (localStorage.getItem("cart") !== null) {
       cart = JSON.parse(localStorage.getItem("cart"));
-    } 
+    }
     let addOns = {};
     $('.options').each(function (i, obj) {
       addOns[$(this).attr("id")] = {
@@ -184,8 +189,8 @@ function mainHandler() {
     updateCartCount();
 
   })
-  $(".itemHref").click(function() {
-    window.location.href="/store.html?product=" + $(this).attr("product");
+  $(".itemHref").click(function () {
+    window.location.href = "/store.html?product=" + $(this).attr("product");
   })
   const urlParams = new URLSearchParams(window.location.search);
   const product = urlParams.get('product')

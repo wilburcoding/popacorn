@@ -127,7 +127,7 @@
       style="flex-direction: column;padding:30px;margin-top:0;align-items: center;margin-bottom:20vh;height:auto;min-height:100vh;">
       <div id="storeContainer"
         style="display:flex;flex-direction: row;width:100%;max-width:1200px;flex-flow: wrap;align-items: center;justify-content: center;margin-bottom:50px;height:auto;">
-      
+
       </div>
 
     </div>
@@ -158,16 +158,16 @@
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
     const formatter = new Intl.NumberFormat('en-US', {
-        style: 'decimal',
-        maximumFractionDigits: 2,
-        minimumFractionDigits: 2
+      style: 'decimal',
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2
     });
     const querySnapshot = await getDocs(collection(db, "products"));
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        const id = doc.id;
-        const data = doc.data();
-        $("#storeContainer").append(`
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      const id = doc.id;
+      const data = doc.data();
+      $("#storeContainer").append(`
                 <div class="product" id="${id}">
                     <div class="pimg">
                         <img src="${data.img}">
@@ -176,14 +176,27 @@
                     <h4>৳${formatter.format((data.cost))}</h4>
                 </div>
                 `)
-        $(".product").click(handleProductClick);
+      $(".product").click(handleProductClick);
 
-        $(".itemHref").click(function () {
-          window.location.href = "/store.html?product=" + $(this).attr("product");
-        })
+      $(".itemHref").click(function () {
+        window.location.href = "/store.html?product=" + $(this).attr("product");
+      })
 
-      });
-
+    });
+    async function main() {
+      const querySnapshot2 = await getDocs(collection(db, "products"));
+      console.log(querySnapshot2);
+      querySnapshot2.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        const id = doc.id;
+        const data = doc.data();
+        PRODUCTS[id] = data;
+        PRODUCTS[id].addons = String(data.addons).split(",");
+      })
+    }
+    main().then(() => {
+      mainHandler();
+    })
   </script>
 
 </body>
