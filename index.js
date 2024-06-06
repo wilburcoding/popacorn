@@ -207,7 +207,7 @@ function mainHandler() {
     const ID = product;
     const data = PRODUCTS[ID];
     $("#productTitle").html(data.title);
-    $("#productCost").html(data.cost);
+    $("#productCost").html("৳" + formatter.format(data.cost));
     $("#productDesc").html(data.desc);
     $("#productImg").attr("src", data.img);
     currentItem = ID;
