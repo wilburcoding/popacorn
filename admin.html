@@ -78,7 +78,7 @@
           <button id="deleteOrder">Delete</button>
         </div>
         <h2>Products View</h2>
-        <table id="btable" style="width:100%;">
+        <table id="ptable" style="width:100%;">
           <tr>
             <th>ID</th>
             <th>Title</th>
@@ -215,12 +215,17 @@
             <p style="margin:0;margin-bottom:5px;font-weight:800">Total Cost (With delivery fee): ৳${data.total}</p>
           `)
       });
+      const querySnapshot2 = await getDocs(collection(db, "products"));
+      querySnapshot2.forEach((doc) => {
+      })
+
       $("#deleteOrder").click(async function () {
         deleteDoc(doc(db, "orders", $("#deleteId").val())).then(function () {
           window.location.reload();
 
         })
       })
+
     }
     window.onload = onload;
     let mobile = false;
