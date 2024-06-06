@@ -1,4 +1,4 @@
-const PRODUCTS = {
+let PRODUCTS = {
   "garliccheese": {
     "img": "./assets/garliccheese.jpg",
     "title": "Garlic Cheese",
@@ -78,7 +78,10 @@ function handleProductClick() {
     }, 500)
   
 }
-window.onload = function () {
+
+function mainHandler() {
+  //Load Products Information Here
+  console.log(PRODUCTS)
   let mobile = false;
   function updateCartCount() {
     if (localStorage.getItem("cart") !== null) {

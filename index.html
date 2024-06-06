@@ -108,7 +108,7 @@
             <h1 style="font-size:50px;margin-top:40px;">FEATURED PRODUCTS</h1>
             <div id="featuredProducts"
                 style="display:flex;flex-direction: row;width:100%;max-width:1200px;flex-flow: wrap;align-items: center;justify-content: center;margin-bottom:50px;">
-                
+
             </div>
 
         </div>
@@ -276,17 +276,17 @@
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
         const formatter = new Intl.NumberFormat('en-US', {
-                style: 'decimal',
-                maximumFractionDigits: 2,
-                minimumFractionDigits: 2
+            style: 'decimal',
+            maximumFractionDigits: 2,
+            minimumFractionDigits: 2
 
-            });
+        });
         const querySnapshot = await getDocs(collection(db, "products"));
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                const id = doc.id;
-                const data = doc.data();
-                $("#featuredProducts").append(`
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            const id = doc.id;
+            const data = doc.data();
+            $("#featuredProducts").append(`
                 <div class="product itemHref" product="${id}">
                     <div class="pimg">
                         <img src="${data.img}">
@@ -295,11 +295,24 @@
                     <h4>৳${formatter.format((data.cost))}</h4>
                 </div>
                 `)
-                $(".itemHref").click(function () {
-                    window.location.href = "/store.html?product=" + $(this).attr("product");
-                })
-                
-            });
+            $(".itemHref").click(function () {
+                window.location.href = "/store.html?product=" + $(this).attr("product");
+            })
+
+        });
+        PRODUCTS = {};
+        async function main() {
+            const querySnapshot2 = await getDocs(collection(db, "products"));
+            querySnapshot2.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                const id = doc.id;
+                const data = doc.data();
+                PRODUCTS[id] = data;
+            })
+            mainHandler();
+        }
+        main();
+
 
     </script>
 </body>
