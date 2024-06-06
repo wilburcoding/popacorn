@@ -115,7 +115,7 @@
               <p>+ Butter</p>
             </div>
           </div>
-          <p style="margin:0;font-size:20px;font-weight:600">In Stock</p>
+          <p style="margin:0;font-size:20px;font-weight:600" id="stockInfo">In Stock</p>
           <button class="primaryBtn" id="addToCart">Add to Cart</button>
 
 
@@ -176,7 +176,7 @@
                     <h4>৳${formatter.format((data.cost))}</h4>
                 </div>
                 `)
-      $(".product").click(handleProductClick);
+      $("#" + id).click(handleProductClick);
 
       $(".itemHref").click(function () {
         window.location.href = "/store.html?product=" + $(this).attr("product");

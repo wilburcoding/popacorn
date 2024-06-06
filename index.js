@@ -56,6 +56,14 @@ function handleProductClick() {
   $("#productImg").attr("src", data.img);
   currentItem = ID;
   $("#addons").html("");
+  console.log(data.instock)
+  if (Boolean(data.instock)) {
+    $("#stockInfo").html("In Stock")
+    $("#addToCart").attr("disabled", false);
+  } else {
+    $("#stockInfo").html("Out of Stock")
+    $("#addToCart").attr("disabled", true);
+  }
   for (let item of data.addons) {
     $("#addons").append(`
         <div class="options" id="option${String(item).replaceAll(" ", "").toLowerCase()}" >
