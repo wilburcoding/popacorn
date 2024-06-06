@@ -424,6 +424,20 @@ body {
 #btable tr td {
   font-size:15px;
 }
+#ptable td,
+#ptable th,
+#ptable tr {
+  border: solid 1px black;
+
+}
+
+#ptable {
+  border: solid 1px black;
+}
+
+#ptable tr td {
+  font-size: 15px;
+}
 #contentadmin {
   width:90vw;
   height:auto;
