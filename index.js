@@ -211,6 +211,13 @@ function mainHandler() {
     $("#productDesc").html(data.desc);
     $("#productImg").attr("src", data.img);
     currentItem = ID;
+    if (Boolean(data.instock)) {
+      $("#stockInfo").html("In Stock")
+      $("#addToCart").attr("disabled", false);
+    } else {
+      $("#stockInfo").html("Out of Stock")
+      $("#addToCart").attr("disabled", true);
+    }
     $("#addons").html("");
     for (let item of data.addons) {
       $("#addons").append(`
