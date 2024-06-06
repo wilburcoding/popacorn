@@ -217,6 +217,20 @@
       });
       const querySnapshot2 = await getDocs(collection(db, "products"));
       querySnapshot2.forEach((doc) => {
+        const id = doc.id;
+        const data = doc.data();
+        $("#ptable").append(`
+        <tr>
+          <td><input type="text" value="${id}"/></td>
+          <td><input type="text" value="${data.title}"/></td>
+          <td><input type="text" value="${data.cost}"/></td>
+          <td><input type="text" value="${data.desc}"/></td>
+          <td><input type="text" value="${data.img}"/></td>
+          <td><input type="text" value="${data.instock}"/></td>
+          <td><input type="text" value="${data.addons}"/></td>
+
+          </tr>
+        `)
       })
 
       $("#deleteOrder").click(async function () {
