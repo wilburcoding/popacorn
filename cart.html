@@ -47,14 +47,14 @@
       <h4 class="menulink" id="mlDelivery" style="margin:0;margin-left:100px">Delivery</h4>
       <h4 class="menulink" id="mlContact" style="margin:0;margin-left:100px">Contact Us</h4>
       <div style="display: flex;flex-direction: row;align-items: flex-start;justify-content:flex-start;width:80vw">
-          <div class="insta"
-              style="height:55px;width:55px;background-color: transparent;border-radius: 50%;display:flex;align-items: center;justify-content: center;margin-right:10px;">
-              <i class="fa-brands fa-instagram" style="color:white;font-size:40px;"></i>
-          </div>
-          <div class="faceb"
-              style="height:55px;width:55px;background-color: transparent;border-radius: 50%;display:flex;align-items: center;justify-content: center;margin-right:10px;">
-              <i class="fa-brands fa-facebook" style="color:white;font-size:40px;"></i>
-          </div>
+        <div class="insta"
+          style="height:55px;width:55px;background-color: transparent;border-radius: 50%;display:flex;align-items: center;justify-content: center;margin-right:10px;">
+          <i class="fa-brands fa-instagram" style="color:white;font-size:40px;"></i>
+        </div>
+        <div class="faceb"
+          style="height:55px;width:55px;background-color: transparent;border-radius: 50%;display:flex;align-items: center;justify-content: center;margin-right:10px;">
+          <i class="fa-brands fa-facebook" style="color:white;font-size:40px;"></i>
+        </div>
       </div>
     </div>
     <div id="cart">
@@ -152,7 +152,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
     const firebaseConfig = {
       apiKey: "AIzaSyBLZQeeK9JAESw3gN7l0hksGbyUMlbm3ZQ",
       authDomain: "popacorn-8af6b.firebaseapp.com",
@@ -162,142 +162,124 @@
       appId: "1:61775911379:web:464bacfa574458965b3726",
       measurementId: "G-WHDEL9KXW3"
     };
+    let PRODUCTS = {}
     var token = function () {
       return Math.random().toString(36).substr(2);
     };
+    mainHandler();
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
-    const REQUIRED = ["cfirst", "clast", "cemail", "cphone", "caddress1", "ccity", "ccountry", "czip"];
-    $("#submitForm").click(async function () {
-      for (var item of REQUIRED) {
-        if ($("#" + item).val() == "") {
-          $("#required").css("display", "flex");
-          return
-        }
-
-      }
-      let finalTotal = await String($("#finaltotal").html()).substring(1);
-      await setDoc(doc(db, "orders", await token()), {
-        address: $("#caddress1").val() + ", " + $("#caddress2").val() + ", " + $("#ccity").val() + ", " + $("#ccountry").val() + " " + $("#czip").val(),
-        cartraw: localStorage.getItem("cart"),
-        email: $("#cemail").val(),
-        name: $("#cfirst").val() + " " + $("#clast").val(),
-        phonenumber: $("#cphone").val(),
-        total: parseFloat(finalTotal),
-        timecreated: Date.now()
-      });
-      $("#checkoutmain").animate({
-        opacity:0
-      }, 500, function() {
-        $("#checkoutmain").css('display', 'none');
+    async function main() {
+      const querySnapshot2 = await getDocs(collection(db, "products"));
+      console.log(querySnapshot2);
+      querySnapshot2.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        const id = doc.id;
+        const data = doc.data();
+        PRODUCTS[id] = data;
       })
-
-      $("#completemain").css("display", "flex");
-      localStorage.setItem("cart", JSON.stringify([]));
-      if (localStorage.getItem("cart") !== null) {
-        const dat = JSON.parse(localStorage.getItem("cart"));
-        $("#cartCountP").html(dat.length);
-        $("#cartCount").css('display', 'flex');
-
-      } else {
-        $("#cartCount").css('display', 'none');
-
-      }
-
-
-    })
-
-  </script>
-  <script>
-    const formatter = new Intl.NumberFormat('en-US', {
-      style: 'decimal',
-      maximumFractionDigits: 2,
-      minimumFractionDigits: 2
-
-    });
-    function costFromWeight(weight) {
-      if (weight <= 1) {
-        return 50
-      }
-      return 70;
-
     }
+    main().then(() => {
+      const REQUIRED = ["cfirst", "clast", "cemail", "cphone", "caddress1", "ccity", "ccountry", "czip"];
+      $("#submitForm").click(async function () {
+        for (var item of REQUIRED) {
+          if ($("#" + item).val() == "") {
+            $("#required").css("display", "flex");
+            return
+          }
 
-    if (localStorage.getItem("cart") != null) {
-
-      const PRODUCTS = {
-        "garliccheese": {
-          "img": "./assets/garliccheese.jpg",
-          "title": "Garlic Cheese",
-          "cost": 90.00,
-        },
-        "cheesecaramel": {
-          "img": "./assets/cheesecaramel.jpg",
-          "title": "Cheese Caramel",
-          "cost": 100.00,
-        },
-        "caramelchocolate": {
-          "img": "./assets/chocolatecaramel.jpg",
-          "cost": 100.00,
-          "title": "Chocolate Caramel",
-        },
-        "classiccaramel": {
-          "img": "./assets/classiccaramel.jpg",
-          "cost": 90.00,
-          "title": "Classic Salted Caramel",
-        },
-        "cookiesandcream": {
-          "img": "./assets/cookiesandcream.jpg",
-          "cost": 100.00,
-          "title": "Cookies and Cream",
         }
-      }
-      let cart = JSON.parse(localStorage.getItem('cart'));
-      let finalcost = 0;
-      let countsm = 0;
-      let countlg = 0;
-      if (cart.length == 0) {
-        $("#checkout").css("display", "none");
-      } else {
-        $("#empty").css("display", "none");
-        $("#storeL").css('display', "none");
-      }
+        let finalTotal = await String($("#finaltotal").html()).substring(1);
+        await setDoc(doc(db, "orders", await token()), {
+          address: $("#caddress1").val() + ", " + $("#caddress2").val() + ", " + $("#ccity").val() + ", " + $("#ccountry").val() + " " + $("#czip").val(),
+          cartraw: localStorage.getItem("cart"),
+          email: $("#cemail").val(),
+          name: $("#cfirst").val() + " " + $("#clast").val(),
+          phonenumber: $("#cphone").val(),
+          total: parseFloat(finalTotal),
+          timecreated: Date.now()
+        });
+        $("#checkoutmain").animate({
+          opacity: 0
+        }, 500, function () {
+          $("#checkoutmain").css('display', 'none');
+        })
 
-      for (let item of cart) {
+        $("#completemain").css("display", "flex");
+        localStorage.setItem("cart", JSON.stringify([]));
+        if (localStorage.getItem("cart") !== null) {
+          const dat = JSON.parse(localStorage.getItem("cart"));
+          $("#cartCountP").html(dat.length);
+          $("#cartCount").css('display', 'flex');
 
-        const productData = PRODUCTS[item.id];
-        console.log(productData.img);
-        let primaryCost = productData.cost;
-        if (item.portion == "small") {
-          primaryCost -= 37;
-          countsm += 1;
         } else {
-          countlg += 1;
-        }
-        const addons = item.addons;
-        let addonscount = 0;
-        let addonstext = "Addons: ";
-        for (let addondat of Object.keys(addons)) {
-          const addon = addons[addondat];
-          if (addon.val == false) {
-            continue;
-          }
-          if (addonscount != 0) {
-            addonstext += ", ";
-          }
-          addonstext += addon.name;
-          addonscount += 1;
-        }
-        let secondaryCosts = addonscount * 20.00;
-        const final = primaryCost + secondaryCosts;
-        if (addonscount == 0) {
-          addonstext = "No Addons";
-        }
-        const uid = item.uid;
-        finalcost += final;
+          $("#cartCount").css('display', 'none');
 
-        $("#cartItems").append(`
+        }
+
+
+      })
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'decimal',
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2
+
+      });
+      function costFromWeight(weight) {
+        if (weight <= 1) {
+          return 50
+        }
+        return 70;
+
+      }
+
+      if (localStorage.getItem("cart") != null) {
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        let finalcost = 0;
+        let countsm = 0;
+        let countlg = 0;
+        if (cart.length == 0) {
+          $("#checkout").css("display", "none");
+        } else {
+          $("#empty").css("display", "none");
+          $("#storeL").css('display', "none");
+        }
+
+        for (let item of cart) {
+
+          const productData = PRODUCTS[item.id];
+          console.log(productData.img);
+          let primaryCost = productData.cost;
+          if (item.portion == "small") {
+            primaryCost -= 37;
+            countsm += 1;
+          } else {
+            countlg += 1;
+          }
+          const addons = item.addons;
+          let addonscount = 0;
+          let addonstext = "Addons: ";
+          for (let addondat of Object.keys(addons)) {
+            const addon = addons[addondat];
+            if (addon.val == false) {
+              continue;
+            }
+            if (addonscount != 0) {
+              addonstext += ", ";
+            }
+            addonstext += addon.name;
+            addonscount += 1;
+          }
+          let secondaryCosts = addonscount * 20.00;
+          const final = primaryCost + secondaryCosts;
+          if (addonscount == 0) {
+            addonstext = "No Addons";
+          }
+          const uid = item.uid;
+          finalcost += final;
+
+          $("#cartItems").append(`
           <div class="cartItem" id="c${uid}">
             <div class="delete" id="${uid}">
               <i class="fa-solid fa-xmark"></i>
@@ -315,88 +297,95 @@
             </div>
           </div>
           `
-        )
-        $("#" + uid).click(function () {
-          $("#c" + uid).css("display", "none");
-          const result = (cart.filter((cartite) => String(cartite.uid) != String(uid)));
-          localStorage.setItem("cart", JSON.stringify(result));
-          cart = result;
-          finalcost = 0;
-          let numsl = 0;
-          let numlg = 0;
-          for (let item of cart) {
-            finalcost += PRODUCTS[item.id].cost;
-            for (let addon of Object.values(item.addons)) {
-              if (addon.val) {
-                finalcost += 20;
+          )
+          $("#" + uid).click(function () {
+            $("#c" + uid).css("display", "none");
+            const result = (cart.filter((cartite) => String(cartite.uid) != String(uid)));
+            localStorage.setItem("cart", JSON.stringify(result));
+            cart = result;
+            finalcost = 0;
+            let numsl = 0;
+            let numlg = 0;
+            for (let item of cart) {
+              finalcost += PRODUCTS[item.id].cost;
+              for (let addon of Object.values(item.addons)) {
+                if (addon.val) {
+                  finalcost += 20;
+                }
+              }
+              if (item.portion == "small") {
+                numsl += 1;
+              } else {
+                numlg += 1;
               }
             }
-            if (item.portion == "small") {
-              numsl += 1;
+            $("#subtp").html("৳" + formatter.format(finalcost));
+
+            if (finalcost > 1099) {
+
+              $("#subtd").html("৳0.00");
             } else {
-              numlg += 1;
+              let weight = (0.2 * numlg) + (0.05 * numsl);
+              $("#subtd").html("৳" + formatter.format(weight));
+
+              finalcost += costFromWeight(weight);
+
             }
-          }
-          $("#subtp").html("৳" + formatter.format(finalcost));
 
-          if (finalcost > 1099) {
+            if (cart.length == 0) {
+              $("#checkout").css("display", "none");
+              $("#empty").css('display', "block");
+              $("#storeL").css('display', "block");
+            }
 
-            $("#subtd").html("৳0.00");
-          } else {
-            let weight = (0.2 * numlg) + (0.05 * numsl);
-            $("#subtd").html("৳" + formatter.format(weight));
+            $("#finaltotal").html("৳" + formatter.format(finalcost));
 
-            finalcost += costFromWeight(weight);
+            if (localStorage.getItem("cart") !== null) {
+              const dat = JSON.parse(localStorage.getItem("cart"));
+              $("#cartCountP").html(dat.length);
+              $("#cartCount").css('display', 'flex');
 
-          }
+            } else {
+              $("#cartCount").css('display', 'none');
 
-          if (cart.length == 0) {
-            $("#checkout").css("display", "none");
-            $("#empty").css('display', "block");
-            $("#storeL").css('display', "block");
-          }
+            }
+          })
+        }
+        $("#subtp").html("৳" + formatter.format(finalcost));
+        console.log($("#cartCountP").html())
+        if (finalcost > 1099) {
+          $("#subtd").html("৳0.00");
+        } else {
+          let weight = (0.2 * countlg) + (0.05 * countsm);
+          console.log(weight);
+          finalcost += costFromWeight(weight);
+          $("#subtd").html("৳" + formatter.format(costFromWeight(weight)));
 
-          $("#finaltotal").html("৳" + formatter.format(finalcost));
+        }
+        $("#finaltotal").html("৳" + formatter.format(finalcost));
 
-          if (localStorage.getItem("cart") !== null) {
-            const dat = JSON.parse(localStorage.getItem("cart"));
-            $("#cartCountP").html(dat.length);
-            $("#cartCount").css('display', 'flex');
 
-          } else {
-            $("#cartCount").css('display', 'none');
-
-          }
-        })
-      }
-      $("#subtp").html("৳" + formatter.format(finalcost));
-      console.log($("#cartCountP").html())
-      if (finalcost > 1099) {
-        $("#subtd").html("৳0.00");
       } else {
-        let weight = (0.2 * countlg) + (0.05 * countsm);
-        console.log(weight);
-        finalcost += costFromWeight(weight);
-        $("#subtd").html("৳" + formatter.format(costFromWeight(weight)));
+        $("#checkout").css("display", "none");
 
       }
-      $("#finaltotal").html("৳" + formatter.format(finalcost));
+      $("#checkoutmain").css('display', 'none');
 
-
-    } else {
-      $("#checkout").css("display", "none");
-
-    }
-    $("#checkoutmain").css('display', 'none');
-
-    $("#goCheckout").click(function () {
-      $("#cart").animate({
-        opacity:0,
-      }, 500, function() {
-        $("#cart").css("display","none")
+      $("#goCheckout").click(function () {
+        $("#cart").animate({
+          opacity: 0,
+        }, 500, function () {
+          $("#cart").css("display", "none")
+        })
+        $("#checkoutmain").css('display', 'flex');
       })
-      $("#checkoutmain").css('display', 'flex');
     })
+
+    
+
+  </script>
+  <script>
+
 
 
 
