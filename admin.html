@@ -130,33 +130,7 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
-    const PRODUCTS = {
-      "garliccheese": {
-        "img": "./assets/garliccheese.jpg",
-        "title": "Garlic Cheese",
-        "cost": 90.00,
-      },
-      "cheesecaramel": {
-        "img": "./assets/cheesecaramel.jpg",
-        "title": "Cheese Caramel",
-        "cost": 100.00,
-      },
-      "caramelchocolate": {
-        "img": "./assets/chocolatecaramel.jpg",
-        "cost": 100.00,
-        "title": "Chocolate Caramel",
-      },
-      "classiccaramel": {
-        "img": "./assets/classiccaramel.jpg",
-        "cost": 90.00,
-        "title": "Classic Salted Caramel",
-      },
-      "cookiesandcream": {
-        "img": "./assets/cookiesandcream.jpg",
-        "cost": 100.00,
-        "title": "Cookies and Cream",
-      }
-    }
+    let PRODUCTS = {}
     const onload = async function () {
       function updateCartCount() {
         if (localStorage.getItem("cart") !== null) {
@@ -171,6 +145,24 @@
         }
       }
       updateCartCount();
+      const querySnapshot2 = await getDocs(collection(db, "products"));
+      querySnapshot2.forEach((doc) => {
+        const id = doc.id;
+        const data = doc.data();
+        PRODUCTS[id] = data;
+        $("#ptable").append(`
+        <tr>
+          <td><input type="text" value="${id}"/></td>
+          <td><input type="text" value="${data.title}"/></td>
+          <td><input type="text" value="${data.cost}"/></td>
+          <td><input type="text" value="${data.desc}"/></td>
+          <td><input type="text" value="${data.img}"/></td>
+          <td><input type="text" value="${data.instock}"/></td>
+          <td><input type="text" value="${data.addons}"/></td>
+
+          </tr>
+        `)
+      })
       const querySnapshot = await getDocs(collection(db, "orders"));
       querySnapshot.forEach((doc) => {
         const id = doc.id;
@@ -215,23 +207,7 @@
             <p style="margin:0;margin-bottom:5px;font-weight:800">Total Cost (With delivery fee): ৳${data.total}</p>
           `)
       });
-      const querySnapshot2 = await getDocs(collection(db, "products"));
-      querySnapshot2.forEach((doc) => {
-        const id = doc.id;
-        const data = doc.data();
-        $("#ptable").append(`
-        <tr>
-          <td><input type="text" value="${id}"/></td>
-          <td><input type="text" value="${data.title}"/></td>
-          <td><input type="text" value="${data.cost}"/></td>
-          <td><input type="text" value="${data.desc}"/></td>
-          <td><input type="text" value="${data.img}"/></td>
-          <td><input type="text" value="${data.instock}"/></td>
-          <td><input type="text" value="${data.addons}"/></td>
 
-          </tr>
-        `)
-      })
 
       $("#deleteOrder").click(async function () {
         deleteDoc(doc(db, "orders", $("#deleteId").val())).then(function () {
