@@ -430,6 +430,11 @@ body {
   border: solid 1px black;
 
 }
+#ptable textarea {
+font-size:14px;
+height:100px;
+}
+
 
 #ptable {
   border: solid 1px black;
@@ -440,6 +445,7 @@ body {
 }
 #contentadmin {
   width:90vw;
+  margin-bottom:30vh;
   height:auto;
   display: flex;
   flex-direction: column;
