@@ -157,6 +157,7 @@
         const id = doc.id;
         const data = doc.data();
         PRODUCTS[id] = data;
+        console.log(data.instock)
         $("#ptable").append(`
         <tr>
           <td><p>${id}</p></td>
@@ -164,7 +165,7 @@
           <td><input type="number" id="${id}cost" value="${data.cost}"/></td>
           <td><textarea id="${id}desc">${data.desc}</textarea></td>
           <td><input type="text" id="${id}img" value="${data.img}"/></td>
-          <td><input type="text" id="${id}instock" value="${data.instock}"/></td>
+          <td><input type="checkbox" id="${id}instock" ${Boolean(data.instock) ? "checked" : ""}/></td>
           <td><textarea id="${id}addons">${data.addons}</textarea></td>
 
           </tr>
@@ -232,10 +233,7 @@
             alert("Cost must be a real positive integer");
             return;
           }
-          if ($("#" + id + "instock").val() != "true" && $("#" + id + "instock").val() != "false") {
-            alert("In stock value must be true or false");
-            return;
-          }
+
           for (let str of $("#" + id + "addons").val().split(",")) {
             if (addons != "") {
               addons+=","
@@ -248,11 +246,12 @@
             cost: Number($("#" + id + "cost").val()),
             desc:$("#" + id + "desc").val(),
             img:$("#" + id + "img").val(),
-            instock: Boolean($("#" + id + "instock").val()),
+            instock: $("#" + id + "instock").prop("checked"),
             title: $("#" + id + "title").val()
           });
 
         }
+        alert("Success!")
       })
 
     }
