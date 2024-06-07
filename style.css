@@ -435,7 +435,9 @@ font-size:14px;
 height:100px;
 }
 
-
+#save {
+  width:100px;
+}
 #ptable {
   border: solid 1px black;
 }
