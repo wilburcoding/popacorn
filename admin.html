@@ -78,6 +78,8 @@
           <button id="deleteOrder">Delete</button>
         </div>
         <h2>Products View</h2>
+        <button id="save">Save</button>
+
         <table id="ptable" style="width:100%;">
           <tr>
             <th>ID</th>
@@ -85,7 +87,7 @@
             <th>Cost</th>
             <th>Description</th>
             <th>Img URL</th>
-            <th>In stock</th>
+            <th>In stock (true or false)</th>
             <th>Addons (separated by commas)</th>
           </tr>
         </table>
@@ -105,7 +107,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-    import { getFirestore, deleteDoc, doc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, deleteDoc, doc, setDoc, collection, query, where, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
     const firebaseConfig = {
       apiKey: "AIzaSyBLZQeeK9JAESw3gN7l0hksGbyUMlbm3ZQ",
       authDomain: "popacorn-8af6b.firebaseapp.com",
@@ -131,7 +133,12 @@
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
     let PRODUCTS = {}
+    function isNumeric(value) {
+      return /^\d+$/.test(value);
+    }
+
     const onload = async function () {
+      let ids = [];
       function updateCartCount() {
         if (localStorage.getItem("cart") !== null) {
           const dat = JSON.parse(localStorage.getItem("cart"));
@@ -152,16 +159,17 @@
         PRODUCTS[id] = data;
         $("#ptable").append(`
         <tr>
-          <td><input type="text" value="${id}"/></td>
-          <td><input type="text" value="${data.title}"/></td>
-          <td><input type="number" value="${data.cost}"/></td>
-          <td><textarea>${data.desc}</textarea></td>
-          <td><input type="text" value="${data.img}"/></td>
-          <td><input type="text" value="${data.instock}"/></td>
-          <td><textarea>${data.addons}</textarea></td>
+          <td><p>${id}</p></td>
+          <td><input type="text" id="${id}title" value="${data.title}"/></td>
+          <td><input type="number" id="${id}cost" value="${data.cost}"/></td>
+          <td><textarea id="${id}desc">${data.desc}</textarea></td>
+          <td><input type="text" id="${id}img" value="${data.img}"/></td>
+          <td><input type="text" id="${id}instock" value="${data.instock}"/></td>
+          <td><textarea id="${id}addons">${data.addons}</textarea></td>
 
           </tr>
         `)
+        ids.push(id);
       })
       const querySnapshot = await getDocs(collection(db, "orders"));
       querySnapshot.forEach((doc) => {
@@ -214,6 +222,37 @@
           window.location.reload();
 
         })
+      })
+      $("#save").click(async function () {
+        for (let id of ids) {
+          const ref = doc(db, "products", id);
+          let addons = ""
+          console.log(id)
+          if (!isNumeric(String($("#" + id + "cost").val()))) {
+            alert("Cost must be a real positive integer");
+            return;
+          }
+          if ($("#" + id + "instock").val() != "true" && $("#" + id + "instock").val() != "false") {
+            alert("In stock value must be true or false");
+            return;
+          }
+          for (let str of $("#" + id + "addons").val().split(",")) {
+            if (addons != "") {
+              addons+=","
+            }
+            addons += (String(str).trim());
+          }
+          console.log(addons);
+          await updateDoc(ref, {
+            addons: addons,
+            cost: Number($("#" + id + "cost").val()),
+            desc:$("#" + id + "desc").val(),
+            img:$("#" + id + "img").val(),
+            instock: Boolean($("#" + id + "instock").val()),
+            title: $("#" + id + "title").val()
+          });
+
+        }
       })
 
     }
