@@ -91,6 +91,11 @@
             <th>Addons (separated by commas)</th>
           </tr>
         </table>
+        <h2>Delete Product by ID</h2>
+        <div style="width:300px">
+          <input id="deletePId" type="text" placeholder="Product ID">
+          <button id="deleteP">Delete</button>
+        </div>
 
       </div>
     </div>
@@ -236,7 +241,7 @@
 
           for (let str of $("#" + id + "addons").val().split(",")) {
             if (addons != "") {
-              addons+=","
+              addons += ","
             }
             addons += (String(str).trim());
           }
@@ -244,8 +249,8 @@
           await updateDoc(ref, {
             addons: addons,
             cost: Number($("#" + id + "cost").val()),
-            desc:$("#" + id + "desc").val(),
-            img:$("#" + id + "img").val(),
+            desc: $("#" + id + "desc").val(),
+            img: $("#" + id + "img").val(),
             instock: $("#" + id + "instock").prop("checked"),
             title: $("#" + id + "title").val()
           });
