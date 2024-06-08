@@ -229,6 +229,12 @@
 
         })
       })
+      $("#deleteP").click(async function () {
+        deleteDoc(doc(db, "products", $("#deletePId").val())).then(function () {
+          window.location.reload();
+
+        })
+      })
       $("#save").click(async function () {
         for (let id of ids) {
           const ref = doc(db, "products", id);
