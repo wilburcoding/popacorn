@@ -287,6 +287,35 @@
         }
         alert("Success!")
       })
+      $("#addProduct").click(async function () {
+        const id = $("#NEWid").val()
+        if (String(id).length == 0) {
+          alert("Please enter a valid identifier!");
+          return;
+        }
+        const ref = doc(db, "products", id);
+        let addons = ""
+        if (!isNumeric(String($("#NEWcost").val()))) {
+          alert("Cost must be a real positive integer");
+          return;
+        }
+
+        for (let str of $("#NEWaddons").val().split(",")) {
+          if (addons != "") {
+            addons += ","
+          }
+          addons += (String(str).trim());
+        }
+        console.log(addons);
+        await setDoc(ref, {
+          addons: addons,
+          cost: Number($("#NEWcost").val()),
+          desc: $("#NEWdesc").val(),
+          img: $("#NEWimg").val(),
+          instock: $("#NEWinstock").prop("checked"),
+          title: $("#NEWtitle").val()
+        });
+      })
 
     }
     window.onload = onload;
