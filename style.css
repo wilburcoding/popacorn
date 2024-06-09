@@ -3,7 +3,9 @@
   flex-direction: row;
   align-items: center;
   flex-grow: 1;
+
 }
+
 
 .backgroundImg {
   width: 100%;
@@ -170,7 +172,7 @@ body {
 
 .primaryBtn {
   padding: 10px 25px 10px 25px;
-  background-color: rgb(26, 26, 26);
+  background-color: rgb(30, 30, 30);
   color: white;
   font-size: 19px;
   font-weight: 300;
@@ -180,7 +182,7 @@ body {
 }
 
 .primaryBtn:hover {
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(37, 37, 37);
   border-radius: 25px;
 }
 
@@ -334,12 +336,14 @@ body {
   margin-left: 0px !important;
   text-align: left !important;
 }
+
 #contactImg {
   border-radius: 25px;
   transition-duration: 0.3s;
 }
+
 #contactImg:hover {
-  border-radius:15px; 
+  border-radius: 15px;
 }
 
 .review {
@@ -351,6 +355,7 @@ body {
   height: 150px;
   transition-duration: 0.3s;
 }
+
 .review:hover {
   border-radius: 20px;
 }
@@ -361,7 +366,11 @@ body {
 
 .menulink {
   height: 50px;
+  transition-duration: 0.3s;
+  border-radius: 15px;
+  width:auto;
 }
+
 
 .max {
   display: none;
