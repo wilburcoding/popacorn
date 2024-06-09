@@ -100,6 +100,7 @@
       </div>
     </div>
     <div id="checkoutmain">
+      <p id="returnCart" style="margin:0;margin-left:5px;font-size:15px;">Return to Cart</p>
       <h1>Checkout</h1>
       <hr style="color:black;width:100%">
       <div style="display: flex;flex-direction: row;">
@@ -380,8 +381,21 @@
           opacity: 0,
         }, 500, function () {
           $("#cart").css("display", "none")
+          $("#checkoutmain").css('display', 'flex');
+          $("#checkoutmain").css("opacity", 1)
         })
-        $("#checkoutmain").css('display', 'flex');
+
+      })
+      $("#returnCart").click(function () {
+        $("#checkoutmain").animate({
+          opacity: 0,
+        }, 500, function () {
+          $("#checkoutmain").css("display", "none")
+          $("#cart").css('display', 'flex');
+          $("#cart").css('opacity', 1);
+
+        })
+
       })
     })
 

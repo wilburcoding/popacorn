@@ -464,9 +464,18 @@ height:100px;
   margin-right: 5px;
   font-size: 15px;
 }
+#returnCart {
+  transition-duration: 0.3s;
+  color: rgb(86, 86, 86);
+  font-weight: 300;
+}
+#returnCart:hover {
+  color:black;
+}
 
 #checkoutmain h1 {
   margin: 5px;
+  margin-bottom:0px;
 }
 #completemain h1 {
   margin: 5px;
