@@ -136,19 +136,19 @@ body {
   transition: all .3s ease;
 }
 
-#insta {
+.insta {
   transition-duration: 0.3s;
 }
 
-#insta:hover {
+.insta:hover {
   background-color: rgb(171, 39, 201) !important;
 }
 
-#faceb {
+.faceb {
   transition-duration: 0.3s;
 }
 
-#faceb:hover {
+.faceb:hover {
   background-color: #3b5998 !important;
 }
 
