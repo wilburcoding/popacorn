@@ -445,6 +445,9 @@ height:100px;
 #ptable tr td {
   font-size: 15px;
 }
+#addProduct {
+  width:100px;
+}
 #contentadmin {
   width:90vw;
   margin-bottom:30vh;
