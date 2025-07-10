@@ -107,16 +107,16 @@ function mainHandler() {
   }
   updateCartCount();
   $("#mainNav").click(function () {
-    window.location.href = "/";
+    window.location.href = "./";
   })
   $(".mas").click(function () {
-    window.location.href = "/cart.html"
+    window.location.href = "./cart.html"
   })
   $("#orderNow").click(function () {
-    window.location.href = "/store.html"
+    window.location.href = "./store.html"
   })
   $("#storeL").click(function () {
-    window.location.href = "/store.html"
+    window.location.href = "./store.html"
   })
   $("#followUs").click(function () {
     window.location.href = "https://www.facebook.com/people/PopAcorn/61557374052889/"
@@ -198,7 +198,7 @@ function mainHandler() {
 
   })
   $(".itemHref").click(function () {
-    window.location.href = "/store.html?product=" + $(this).attr("product");
+    window.location.href = ",/store.html?product=" + $(this).attr("product");
   })
   const urlParams = new URLSearchParams(window.location.search);
   const product = urlParams.get('product')
